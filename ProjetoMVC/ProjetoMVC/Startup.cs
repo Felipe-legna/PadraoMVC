@@ -39,6 +39,8 @@ namespace ProjetoMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddMVCConfig();
 
             services.ResolveDependencies();
@@ -72,7 +74,7 @@ namespace ProjetoMVC
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapAreaControllerRoute("admin_route", "Admin",
-                    "Admin/{controller}/{action}/{id?}");
+                    "{controller}/{action}/{id?}");
                 endpoints.MapRazorPages();
             });
         }
