@@ -21,6 +21,8 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
 
         public Guid? CategoriaPaiId { get; set; }
 
+        public CategoriaViewModel CategoriaPai { get; set; }
+
        
     }
 }
