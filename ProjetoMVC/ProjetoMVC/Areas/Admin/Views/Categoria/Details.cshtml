@@ -1,4 +1,4 @@
-﻿@model ProjetoMVC.App.Areas.Admin.ViewModels.ClienteViewModel
+﻿@model ProjetoMVC.App.Areas.Admin.ViewModels.CategoriaViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -28,17 +28,12 @@
             <dd class="col-sm-10">
                 @this.FormataDocumento(Model.TipoCliente, Model.Documento)
             </dd>*@
+        
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
+            @Html.DisplayNameFor(model => model.Slug)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefone)
+            @Html.DisplayFor(model => model.Slug)
         </dd>
         @*<dt class="col-sm-2">
                 @Html.DisplayNameFor(model => model.TipoCliente)
@@ -49,7 +44,7 @@
     </dl>
 </div>
 <div>
-    <a class="btn btn-dark" supress-by-claim-name="Cliente" supress-by-claim-value="Editar" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>  |
+    <a class="btn btn-dark" supress-by-claim-name="Categoria" supress-by-claim-value="Editar" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>  |
     <a class="btn btn-info" asp-action="Index">Voltar</a>
 </div>
 

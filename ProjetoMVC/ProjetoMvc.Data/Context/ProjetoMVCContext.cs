@@ -17,8 +17,9 @@ namespace ProjetoMVC.Data.Context
                 
         
         public DbSet<Cliente> Clientes { get; set; }
-      
-       
+        public DbSet<Categoria> Categorias { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //Para as propriedades do tipo string que não tiverem definidas, serão iniciadas no banco em um coluna com tamnho 100

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using ProjetoMVC.App.Areas.Admin.ViewModel;
+
+using ProjetoMVC.App.Areas.Admin.ViewModels;
 using ProjetoMVC.Business.Interfaces;
 using ProjetoMVC.Business.Models;
 using System;

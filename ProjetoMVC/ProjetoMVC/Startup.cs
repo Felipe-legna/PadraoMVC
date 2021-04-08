@@ -39,6 +39,12 @@ namespace ProjetoMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
 
+            /*
+             * Adicionando sessão
+             */
+            services.AddMemoryCache();
+            services.AddSession();
+
             services.AddAutoMapper(typeof(Startup));
 
             services.AddMVCConfig();
@@ -70,6 +76,7 @@ namespace ProjetoMVC
             app.UseAuthorization();
 
             app.UseGlobalizationConfig();
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
