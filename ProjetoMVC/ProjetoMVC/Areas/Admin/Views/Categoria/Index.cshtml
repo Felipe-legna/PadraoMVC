@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetoMVC.App.Areas.Admin.ViewModels.CategoriaViewModel>
+﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.CategoriaViewModel>
 
 @{
     ViewData["Title"] = "Lista de Categorias";
@@ -16,15 +16,17 @@
     <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @*@Html.DisplayNameFor(model => model.Nome)*@
+                Nome
             </th>
             @*<th>
                     @Html.DisplayNameFor(model => model.Documento)
                 </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Slug)
+                @*@Html.DisplayNameFor(model => model.Slug)*@
+                Slug
             </th>
-          
+
             @*<th>
                     @Html.DisplayNameFor(model => model.TipoCategoria)
                 </th>*@
@@ -44,7 +46,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Slug)
                 </td>
-               
+
                 <td class="text-right">
                     <a class="btn btn-info" asp-action="dados-da-categoria" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
                     <a class="btn btn-warning" asp-area="Admin" asp-action="editar-categoria" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
@@ -55,3 +57,4 @@
     </tbody>
 </table>
 
+@Html.PagedListPager((IPagedList) Model, pagina => Url.Action("Index", new { pagina }))

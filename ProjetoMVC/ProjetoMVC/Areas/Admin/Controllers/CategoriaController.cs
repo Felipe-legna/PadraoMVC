@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace ProjetoMVC.Areas.Admin.Controllers
 {
@@ -30,9 +31,10 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         }
 
         [Route("lista-de-categorias")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pagina)
         {
-            return View(_mapper.Map<IEnumerable<CategoriaViewModel>>(await _contexto.ObterTodos()));
+            IPagedList dadosPaginados = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _contexto.ObterTodosPaginados(pagina)).ToPagedList();
+            return View(dadosPaginados);
         }
 
         [Route("dados-da-categoria/{id:Guid}")]

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-
 using ProjetoMVC.App.Areas.Admin.ViewModels;
 using ProjetoMVC.Business.Interfaces;
 using ProjetoMVC.Business.Models;
@@ -8,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace ProjetoMVC.App.Areas.Admin.Controllers
 {
@@ -27,12 +27,14 @@ namespace ProjetoMVC.App.Areas.Admin.Controllers
             _mapper = mapper;
             _contexto = clienteRepository;
             _clienteService = clienteService;
+
         }
 
         [Route("lista-de-clientes")]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? pagina)
         {
-            return View(_mapper.Map<IEnumerable<ClienteViewModel>>(await _contexto.ObterTodos()));
+            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ClienteViewModel>>(await _contexto.ObterTodosPaginados(pagina)).ToPagedList();
+            return View(dadosPaginados);
         }
 
         [Route("dados-do-cliente/{id:Guid}")]

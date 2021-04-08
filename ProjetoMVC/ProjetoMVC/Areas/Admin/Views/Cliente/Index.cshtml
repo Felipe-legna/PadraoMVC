@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ProjetoMVC.App.Areas.Admin.ViewModels.ClienteViewModel>
+﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.ClienteViewModel>
 
 @{
     ViewData["Title"] = "Lista de Clientes";
@@ -16,20 +16,23 @@
     <thead class="thead-dark">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @*@Html.DisplayNameFor(model => model.Nome)*@
+                Nome
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.Documento)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.Documento)
+                </th>*@
             <th>
-                @Html.DisplayNameFor(model => model.Email)
+                @*@Html.DisplayNameFor(model => model.Email)*@
+                Email
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Telefone)
+                @*@Html.DisplayNameFor(model => model.Telefone)*@
+                Telefone
             </th>
             @*<th>
-                @Html.DisplayNameFor(model => model.TipoCliente)
-            </th>*@
+                    @Html.DisplayNameFor(model => model.TipoCliente)
+                </th>*@
             <th></th>
         </tr>
     </thead>
@@ -41,14 +44,14 @@
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
                 @*<td>
-                    @this.FormataDocumento(item.TipoCliente, item.Documento)
-                </td>*@
+                        @this.FormataDocumento(item.TipoCliente, item.Documento)
+                    </td>*@
                 <td>
                     @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Telefone)
-                </td>                
+                </td>
                 <td class="text-right">
                     <a class="btn btn-info" asp-action="dados-do-cliente" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
                     <a class="btn btn-warning" asp-area="Admin" asp-action="editar-cliente" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
@@ -59,3 +62,4 @@
     </tbody>
 </table>
 
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina }))

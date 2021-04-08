@@ -8,6 +8,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace ProjetoMVC.Data.Repository
 {
@@ -15,6 +16,8 @@ namespace ProjetoMVC.Data.Repository
     {
         protected readonly ProjetoMVCContext Db;
         protected readonly DbSet<TEntity> DbSet;
+
+        protected const int QUANTIDADEPAGINA = 10;
         public Repository(ProjetoMVCContext db)
         {
             Db = db;
@@ -48,7 +51,13 @@ namespace ProjetoMVC.Data.Repository
         {
             return await DbSet.ToListAsync();
         }
-                
+
+        public virtual async Task<IPagedList<TEntity>> ObterTodosPaginados(int? pagina)
+        {
+            int numeroPagina = pagina ?? 1;
+            return await DbSet.ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
+        }
+
         public virtual async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {
             return await DbSet.AsNoTracking().Where(predicate).ToListAsync();

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using X.PagedList;
 
 namespace ProjetoMVC.Business.Interfaces
 {
@@ -11,6 +12,7 @@ namespace ProjetoMVC.Business.Interfaces
         Task Adicionar(TEntity entity);
         Task<TEntity> ObterPorId(Guid id);
         Task<List<TEntity>> ObterTodos();
+        Task<IPagedList<TEntity>> ObterTodosPaginados(int? pagina);
         Task Atualizar(TEntity entity);
         Task Remover(Guid id);
 
