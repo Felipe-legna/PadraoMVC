@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjetoMVC.App.Areas.Admin.ViewModels;
 using ProjetoMVC.Business.Interfaces;
 using ProjetoMVC.Business.Models;
@@ -41,20 +42,24 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         public async Task<IActionResult> Details(Guid id)
         {
 
-            var clienteViewModel = _mapper.Map<CategoriaViewModel>(await _contexto.ObterPorId(id));
+            var categoriaViewModel = _mapper.Map<CategoriaViewModel>(await _contexto.ObterPorId(id));
 
-            if (clienteViewModel == null)
+            if (categoriaViewModel == null)
             {
                 return NotFound();
             }
 
-            return View(clienteViewModel);
+            if (categoriaViewModel.CategoriaPaiId != null)
+                ViewBag.CategoriaPai = _mapper.Map<CategoriaViewModel>(await _contexto.ObterPorId((Guid)categoriaViewModel.CategoriaPaiId)).Nome;
+
+            return View(categoriaViewModel);
         }
 
 
         [Route("nova-categoria")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _contexto.ObterTodos()).Select( a =>new SelectListItem(a.Nome, a.Id.ToString()));
             return View();
         }
 
@@ -80,6 +85,9 @@ namespace ProjetoMVC.Areas.Admin.Controllers
 
             if (clienteViewModel == null) return NotFound();
 
+            //Para evitar que o id seja listado como id pai.
+            ViewBag.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _contexto.ObterTodos()).Where(a => a.Id != id).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
+
             return View(clienteViewModel);
         }
 
@@ -102,11 +110,14 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         [Route("excluir-categoria/{id:Guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var clienteViewModel = _mapper.Map<CategoriaViewModel>(await _contexto.ObterPorId(id));
+            var categoriaViewModel = _mapper.Map<CategoriaViewModel>(await _contexto.ObterPorId(id));
 
-            if (clienteViewModel == null) return NotFound();
+            if (categoriaViewModel == null) return NotFound();
+            
+            if(categoriaViewModel.CategoriaPaiId != null)
+                ViewBag.CategoriaPai = _mapper.Map<CategoriaViewModel>(await _contexto.ObterPorId((Guid)categoriaViewModel.CategoriaPaiId)).Nome;
 
-            return View(clienteViewModel);
+            return View(categoriaViewModel);
         }
 
         [Route("excluir-categoria/{id:Guid}")]

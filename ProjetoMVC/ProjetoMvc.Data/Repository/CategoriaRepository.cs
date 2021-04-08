@@ -15,16 +15,15 @@ namespace ProjetoMvc.Data.Repository
     {
         public CategoriaRepository(ProjetoMVCContext context) : base(context) { }
 
+      
+
+
         public async override Task<IPagedList<Categoria>> ObterTodosPaginados(int? pagina)
         {
             int numeroPagina = pagina ?? 1;
             return await DbSet.Include(c => c.CategoriaPai).ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
         }
-        //public async Task<Cliente> ObterClienteEnderecos(Guid id)
-        //{
-        //    return await Db.Clientes.Include(c => c.Endereco)
-        //        .FirstOrDefaultAsync(c => c.Id == id);            
-        //}
+      
 
 
     }

@@ -23,24 +23,31 @@
             @Html.DisplayFor(model => model.Nome)
         </dd>
         @*<dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.Documento)
-            </dt>
-            <dd class="col-sm-10">
-                @this.FormataDocumento(Model.TipoCliente, Model.Documento)
-            </dd>*@
-        
+            @Html.DisplayNameFor(model => model.Documento)
+        </dt>
+        <dd class="col-sm-10">
+            @this.FormataDocumento(Model.TipoCliente, Model.Documento)
+        </dd>*@
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Slug)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Slug)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Categoria Pai")
+        </dt>
+        <dd class="col-sm-10">
+            @if (!String.IsNullOrEmpty(ViewBag.CategoriaPai))
+                @ViewBag.CategoriaPai
+        </dd>
         @*<dt class="col-sm-2">
-                @Html.DisplayNameFor(model => model.TipoCliente)
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.TipoCliente)
-            </dd>*@
+            @Html.DisplayNameFor(model => model.TipoCliente)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TipoCliente)
+        </dd>*@
     </dl>
 </div>
 <div>

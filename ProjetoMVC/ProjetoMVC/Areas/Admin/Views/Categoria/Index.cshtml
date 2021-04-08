@@ -47,14 +47,16 @@
                 @Html.DisplayFor(modelItem => item.Slug)
             </td>
             <td>
-                @if(item.CategoriaPai != null)
+                @*@if(item.CategoriaPai != null)
                 {
                  <span>@item.CategoriaPai.Nome</span>
                 }
                 else
                 {
                     <span></span>
-                }
+                }*@
+
+                @Html.DisplayFor(modelItem => item.CategoriaPai.Nome)
                 
             </td>
             <td class="text-right">
