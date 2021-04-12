@@ -31,9 +31,9 @@ namespace ProjetoMVC.App.Areas.Admin.Controllers
         }
 
         [Route("lista-de-clientes")]
-        public async Task<IActionResult> Index(int? pagina)
+        public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
-            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ClienteViewModel>>(await _contexto.ObterTodosPaginados(pagina)).ToPagedList();
+            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ClienteViewModel>>(await _contexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
             return View(dadosPaginados);
         }
 
