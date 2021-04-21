@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Lista de Categorias";
+    var pesquisa = Context.Request.Query["pesquisa"];
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -69,4 +70,4 @@
     </tbody>
 </table>
 
-@Html.PagedListPager((IPagedList) Model, pagina => Url.Action("Index", new { pagina }))
+@Html.PagedListPager((IPagedList) Model, pagina => Url.Action("Index", new { pagina, pesquisa = pesquisa }))

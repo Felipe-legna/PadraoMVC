@@ -5,6 +5,7 @@ using ProjetoMVC.Data.Context;
 using ProjetoMVC.Data.Repository;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using X.PagedList;
@@ -15,15 +16,20 @@ namespace ProjetoMvc.Data.Repository
     {
         public CategoriaRepository(ProjetoMVCContext context) : base(context) { }
 
-      
 
-
-        public async override Task<IPagedList<Categoria>> ObterTodosPaginados(int? pagina)
+        public async Task<IPagedList<Categoria>> ObterTodosPaginados(int? pagina, string pesquisa)
         {
             int numeroPagina = pagina ?? 1;
-            return await DbSet.Include(c => c.CategoriaPai).ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
+
+            var categorias = Db.Categorias.AsQueryable();
+
+            if (!String.IsNullOrEmpty(pesquisa))
+                categorias = categorias.Where(c => c.Nome.Contains(pesquisa));
+
+            return await categorias.ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
+
         }
-      
+
 
 
     }

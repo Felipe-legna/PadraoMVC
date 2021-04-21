@@ -32,9 +32,9 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         }
 
         [Route("lista-de-categorias")]
-        public async Task<IActionResult> Index(int? pagina)
+        public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
-            IPagedList dadosPaginados = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _contexto.ObterTodosPaginados(pagina)).ToPagedList();
+            IPagedList dadosPaginados = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _contexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
             return View(dadosPaginados);
         }
 

@@ -31,6 +31,10 @@ namespace ProjetoMVC.Site.Configurations
             services.AddTransient<ICategoriaRepository, CategoriaRepository>();
             services.AddScoped<ICategoriaService, CategoriaService>();
 
+
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddScoped<IProdutoService, ProdutoService>();
+
             //services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             //services.AddScoped<IClienteService, ClienteService>();
 

@@ -7,8 +7,8 @@ using X.PagedList;
 
 namespace ProjetoMVC.Business.Interfaces
 {
-    public interface ICategoriaRepository : IRepository<Categoria>
+    public interface IProdutoRepository : IRepository<Produto>
     {
-        Task<IPagedList<Categoria>> ObterTodosPaginados(int? pagina, string pesquisa);
+        Task<IPagedList<Produto>> ObterTodosPaginados(int? pagina, string pesquisa);
     }
 }
