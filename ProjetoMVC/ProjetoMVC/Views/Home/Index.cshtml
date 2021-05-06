@@ -1,0 +1,73 @@
+﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.CategoriaViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Categorias";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Nova Categoria</a>
+</p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Nome)*@
+                Nome
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Documento)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.Slug)*@
+                Slug
+            </th>
+
+            <th>
+                Categoria Pai
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                @*<td>
+                        @this.FormataDocumento(item.TipoCategoria, item.Documento)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Slug)
+                </td>
+                <td>
+                    @*@if(item.CategoriaPai != null)
+                        {
+                         <span>@item.CategoriaPai.Nome</span>
+                        }
+                        else
+                        {
+                            <span></span>
+                        }*@
+
+                    @Html.DisplayFor(modelItem => item.CategoriaPai.Nome)
+
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-info" asp-action="dados-da-categoria" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
+                    <a class="btn btn-warning" asp-area="Admin" asp-action="editar-categoria" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                    <a class="btn btn-danger" asp-action="excluir-categoria" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, pesquisa = pesquisa }))

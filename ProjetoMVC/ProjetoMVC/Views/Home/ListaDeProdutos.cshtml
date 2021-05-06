@@ -1,0 +1,60 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.ProdutoViewModel>
+@{
+    ViewData["Title"] = "Lista de Produtos";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+<h1>@ViewData["Title"]</h1>
+
+
+
+<form method="get">
+    <div class="form-group">
+        <label for="pesquisa" class="control-label"></label>
+        <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
+    </div>
+    <button type="submit" value="Pesquisar" class="btn btn-info">Pesquisar</button>
+</form>
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>
+                @Html.Display("Nome")
+            </th>
+
+            <th>
+                @Html.Display("Valor")
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+
+
+                <td class="text-right">
+                    <a class="btn btn-info" asp-controller="Orcamento" asp-action="AdicionarItem" asp-route-id="@item.Id"><spam class="fa fa-search"> Adicionar</spam></a>
+                   
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))

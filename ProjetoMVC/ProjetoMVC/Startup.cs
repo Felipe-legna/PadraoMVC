@@ -82,6 +82,7 @@ namespace ProjetoMVC
             {
                 endpoints.MapAreaControllerRoute("admin_route", "Admin",
                     "{controller}/{action}/{id?}");
+                endpoints.MapControllerRoute("padrão", "{controller}/{action}/{id?}");
                 endpoints.MapRazorPages();
             });
         }

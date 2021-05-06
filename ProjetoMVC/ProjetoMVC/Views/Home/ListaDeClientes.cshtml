@@ -1,0 +1,74 @@
+﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.ClienteViewModel>
+
+@{
+    ViewData["Title"] = "Lista de Clientes";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Novo Cliente</a>
+</p>
+
+
+<form method="get">   
+        <div class="form-group">
+            <label for="pesquisa" class="control-label"></label>
+            <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
+        </div>
+    <button type="submit" value="Pesquisar"  class="btn btn-info">Pesquisar</button>
+</form>
+<br />
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Nome)*@
+                Nome
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Documento)
+                </th>*@
+            <th>
+                @*@Html.DisplayNameFor(model => model.Email)*@
+                Email
+            </th>
+            <th>
+                @*@Html.DisplayNameFor(model => model.Telefone)*@
+                Telefone
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.TipoCliente)
+                </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                @*<td>
+                        @this.FormataDocumento(item.TipoCliente, item.Documento)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-info" asp-controller="Orcamento" asp-action="AdicionarCliente" asp-route-id="@item.Id"><spam class="fa fa-search">Adicionar</spam></a>
+                  
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))

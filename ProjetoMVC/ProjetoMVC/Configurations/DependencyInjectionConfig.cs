@@ -5,6 +5,8 @@ using ProjetoMVC.Business.Notifications;
 using ProjetoMVC.Business.Services;
 using ProjetoMVC.Data.Context;
 using ProjetoMVC.Data.Repository;
+using ProjetoMVC.Site.lib.orcamento;
+using ProjetoMVC.wwwroot.lib.cookie;
 
 namespace ProjetoMVC.Site.Configurations
 {
@@ -13,6 +15,8 @@ namespace ProjetoMVC.Site.Configurations
         public static IServiceCollection ResolveDependencies(this IServiceCollection services)
         {
             services.AddScoped<ProjetoMVCContext>();
+            services.AddScoped<Cookie>();
+            services.AddScoped<CookieOrcamento>();
 
             //services.AddScoped<ICategoriaProdutoRepository, CategoriaProdutoRepository>();
             //services.AddScoped<ICategoriaProdutoService, CategoriaProdutoService>();
