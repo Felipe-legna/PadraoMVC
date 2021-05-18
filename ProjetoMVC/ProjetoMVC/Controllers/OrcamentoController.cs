@@ -57,7 +57,8 @@ namespace ProjetoMVC.Controllers
                 var item = new ProdutoItem() { Id = id, QuantidadeProdutoCarrinho = 1 };
                 _cookieOrcamento.Cadastrar(item);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("lista-de-produtos", "Home");
+                //return RedirectToAction(nameof(Index));
             }
         }
 
@@ -75,7 +76,8 @@ namespace ProjetoMVC.Controllers
                 var item = new Cliente() { Id = id };
                 _cookieOrcamento.CadastrarCliente(item);
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("lista-de-clientes", "Home");
+                //return RedirectToAction(nameof(Index));
             }
         }
 

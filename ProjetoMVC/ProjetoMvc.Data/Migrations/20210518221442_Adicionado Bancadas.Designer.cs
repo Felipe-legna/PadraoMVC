@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoMVC.Data.Context;
 
 namespace ProjetoMvc.Data.Migrations
 {
     [DbContext(typeof(ProjetoMVCContext))]
-    partial class ProjetoMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20210518221442_Adicionado Bancadas")]
+    partial class AdicionadoBancadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -106,14 +108,23 @@ namespace ProjetoMvc.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<decimal>("ApoioComprimento")
+                    b.Property<decimal>("AlturaDaBase")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<decimal>("ApoioLargura")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("ApoioComprimento")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ApoioLargura")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("BancadaId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Base")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ComprimentoFogaoEmbutido")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("ComprimentoPeca")
                         .HasColumnType("decimal(18,2)");
@@ -122,6 +133,12 @@ namespace ProjetoMvc.Data.Migrations
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("MetroQuadradoPeca")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalComprimentoPeca")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("TotalLarguraPeca")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");

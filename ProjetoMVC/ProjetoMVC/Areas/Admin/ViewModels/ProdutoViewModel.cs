@@ -18,12 +18,14 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         public string Descricao { get; set; }
         [JsonIgnore]
         public decimal Valor { get; set; }
+        
         [JsonIgnore]
         public int Quantidade { get; set; }
 
         [DisplayName("Imagem do Material")]
         [JsonIgnore]
         public IFormFile ImagemUpload { get; set; }
+        
         [JsonIgnore]
         public string Imagem { get; set; }
        

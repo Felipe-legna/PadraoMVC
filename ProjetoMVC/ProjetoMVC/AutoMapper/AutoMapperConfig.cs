@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using ProjetoMVC.App.Areas.Admin.ViewModels;
-
 using ProjetoMVC.Business.Models;
 
 namespace MgMarmore.Site.AutoMapper
@@ -16,6 +15,9 @@ namespace MgMarmore.Site.AutoMapper
             CreateMap<Cliente, ClienteViewModel>().ReverseMap();
             CreateMap<Categoria, CategoriaViewModel>().ReverseMap();
             CreateMap<Produto, ProdutoViewModel>().ReverseMap();
+            CreateMap<Peca, PecaViewModel>().ReverseMap();
+            CreateMap<Bancada, BancadaViewModel>().ReverseMap();
+            
             //CreateMap<Item, ItemViewModel>().ReverseMap();
             //CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
 

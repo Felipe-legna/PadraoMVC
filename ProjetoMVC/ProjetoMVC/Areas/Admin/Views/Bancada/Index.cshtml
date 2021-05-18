@@ -1,0 +1,13 @@
+﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.BancadaViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, pesquisa = pesquisa }))

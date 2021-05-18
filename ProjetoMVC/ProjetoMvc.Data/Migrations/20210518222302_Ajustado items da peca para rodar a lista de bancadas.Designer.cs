@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoMVC.Data.Context;
 
 namespace ProjetoMvc.Data.Migrations
 {
     [DbContext(typeof(ProjetoMVCContext))]
-    partial class ProjetoMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20210518222302_Ajustado items da peca para rodar a lista de bancadas")]
+    partial class Ajustadoitemsdapecapararodaralistadebancadas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

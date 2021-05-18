@@ -39,6 +39,9 @@ namespace ProjetoMVC.Site.Configurations
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IProdutoService, ProdutoService>();
 
+            services.AddScoped<IBancadaRepository, BancadaRepository>();
+            services.AddScoped<IBancadaService, BancadaService>();
+
             //services.AddScoped<IEnderecoRepository, EnderecoRepository>();
             //services.AddScoped<IClienteService, ClienteService>();
 
@@ -61,7 +64,7 @@ namespace ProjetoMVC.Site.Configurations
             //services.AddScoped<IOrcamentoService, OrcamentoService>();
 
             //services.AddScoped<IServicoService, ServicoService>();
-            //services.AddScoped<IBancadaService, BancadaService>();
+
             //services.AddScoped<IModeloBancadaService, ModeloBancadaService>();
 
 

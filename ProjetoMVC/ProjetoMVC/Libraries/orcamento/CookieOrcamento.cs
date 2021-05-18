@@ -55,11 +55,11 @@ namespace ProjetoMVC.Site.lib.orcamento
            
             if (_cookie.Existe("cliente"))
             {
-                Salvar("cliente", item.Id.ToString());
+                Atualizar("cliente", item.Id.ToString());                
             }
             else
             {
-                Atualizar("cliente", item.Id.ToString());
+                Salvar("cliente", item.Id.ToString());
             }
             
         }

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using ProjetoMVC.App.Areas.Admin.ViewModels;
+
 using ProjetoMVC.Business.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -14,20 +15,20 @@ namespace ProjetoMVC.Controllers
     public class HomeController : Controller
     {
         private readonly IClienteRepository _clienteContexto;
-        private readonly IProdutoRepository _produtoContexto;
-        private readonly IProdutoService _produtoService;
+        private readonly IProdutoRepository _produtoContexto;        
+        private readonly IBancadaRepository _bancadaRepository;
         private readonly ICategoriaRepository _categoriaContexto;
         private readonly IMapper _mapper;
 
         public HomeController(          IClienteRepository clienteContexto,
                                         IProdutoRepository produtoContexto,
-                                        IProdutoService produtoService,
+                                        IBancadaRepository bancadaRepository,
                                         ICategoriaRepository categoriaContexto,
                                         IMapper mapper)
         {
             _clienteContexto = clienteContexto;
             _produtoContexto = produtoContexto;
-            _produtoService = produtoService;
+            _bancadaRepository = bancadaRepository;
             _categoriaContexto = categoriaContexto;
             _mapper = mapper;
 
@@ -50,7 +51,15 @@ namespace ProjetoMVC.Controllers
         }
 
 
-       
+        [Route("lista-de-bancadas")]
+        public async Task<IActionResult> ListaDeBancadas(int? pagina, string pesquisa)
+        {
+            IPagedList dadosPaginados = _mapper.Map<IEnumerable<BancadaViewModel>>(await _bancadaRepository.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
+            return View(dadosPaginados);
+        }
+
+
+
 
     }
 }
