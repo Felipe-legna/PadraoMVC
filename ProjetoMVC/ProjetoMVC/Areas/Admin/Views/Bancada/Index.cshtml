@@ -6,8 +6,54 @@
 
 <h1>Index</h1>
 
+
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-info" asp-action="Create">Nova Bancada</a>
 </p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>          
+                Nome
+            </th>          
+            <th>                
+                Descricao
+            </th>
+            <th>
+                Quantidade de Peças
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                @*<td>
+                        @this.FormataDocumento(item.TipoCategoria, item.Documento)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>                
+
+                    @Html.DisplayFor(modelItem => item.QuantidadePecas)
+
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-info" asp-action="dados-da-bancada" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
+                    <a class="btn btn-warning" asp-area="Admin" asp-action="editar-bancada" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                    <a class="btn btn-danger" asp-action="excluir-bancada" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 
 @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, pesquisa = pesquisa }))

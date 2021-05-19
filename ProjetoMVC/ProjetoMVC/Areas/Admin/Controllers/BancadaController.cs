@@ -40,7 +40,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         }
 
 
-        [Route("dados-da-modelo/{id:Guid}")]
+        [Route("dados-da-bancada/{id:Guid}")]
         public async Task<IActionResult> Details(Guid id)
         {
             var modeloViewModel = _mapper.Map<BancadaViewModel>(await _contexto.ObterPorId(id));
@@ -53,14 +53,14 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             return View(modeloViewModel);
         }
 
-        [Route("novo-modelo")]
+        [Route("nova-bancada")]
         public IActionResult Create()
         {
             //ViewBag.TiposBancadas = _bancadaService.ObterTiposBancadas();
             return View();
         }
 
-        [Route("novo-modelo")]
+        [Route("nova-bancada")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(BancadaViewModel modeloViewModel)
@@ -83,7 +83,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("editar-modelo/{id:Guid}")]
+        [Route("editar-bancada/{id:Guid}")]
         public async Task<IActionResult> Edit(Guid id)
         {
             var modeloViewModel = _mapper.Map<BancadaViewModel>(await _contexto.ObterPorId(id));
@@ -94,7 +94,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         }
 
 
-        [Route("editar-modelo/{id:Guid}")]
+        [Route("editar-bancada/{id:Guid}")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, [Bind("Id,Categoria,Frontao,Saia,Metodo,Imagem,QuantidadePecas,MetroQuadrado")] BancadaViewModel modeloViewModel)
@@ -127,7 +127,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        [Route("excluir-modelo/{id:Guid}")]
+        [Route("excluir-bancada/{id:Guid}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var modeloViewModel = _mapper.Map<BancadaViewModel>(await _contexto.ObterPorId(id));
@@ -137,7 +137,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             return View(modeloViewModel);
         }
 
-        [Route("excluir-modelo/{id:Guid}")]
+        [Route("excluir-bancada/{id:Guid}")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -180,28 +180,29 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             var modeloBancada = _mapper.Map<BancadaViewModel>(await _contexto.ObterPorId(id));
 
 
-            bancadaViewModel.Metodo = modeloBancada.Metodo;
+            //bancadaViewModel.Metodo = modeloBancada.Metodo;
             //var pecas = _mapper.Map<List<Peca>>(bancadaViewModel.Pecas);
 
 
             Bancada bancada = new Bancada
             {
-                //Metodo = modeloBancada.Metodo,
+                Nome = modeloBancada.Nome,
+                Descricao = modeloBancada.Descricao,
                 Frontao = bancadaViewModel.Frontao,
                 Saia = bancadaViewModel.Saia,
                 //Pecas = _mapper.Map<List<Peca>>(bancadaViewModel.Pecas),
                 QuantidadePecas = bancadaViewModel.QuantidadePecas
             };
-            bancada.Pecas = new List<Peca>();
-            foreach (var p in bancadaViewModel.Pecas)
-            {
-                bancada.Pecas.Add(new Peca() { LarguraPeca = p.LarguraPeca, ComprimentoPeca = p.ComprimentoPeca });
-            }
+            //bancada.Pecas = new List<Peca>();
+            //foreach (var p in bancadaViewModel.Pecas)
+            //{
+            //    bancada.Pecas.Add(new Peca() { LarguraPeca = p.LarguraPeca, ComprimentoPeca = p.ComprimentoPeca });
+            //}
 
             //_bancadaService.DefinirTipoBancada("Reta", bancada);
 
             //if (!OperacaoValida()) return PartialView("_AtualizarEndereco", clienteViewModel);
-
+            await _bancadaService.Adicionar(bancada);
 
             return Json(bancadaViewModel);
         }
