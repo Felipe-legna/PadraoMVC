@@ -17,6 +17,8 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
 
         public string Descricao { get; set; }
 
+        public CategoriaViewModel Categoria { get; set; }
+
         public decimal Frontao { get; set; }
 
         public decimal Saia { get; set; }

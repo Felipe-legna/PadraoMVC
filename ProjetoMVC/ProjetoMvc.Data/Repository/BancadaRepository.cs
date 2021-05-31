@@ -27,9 +27,7 @@ namespace ProjetoMvc.Data.Repository
                 Bancadas = Bancadas.Where(c => c.Nome.Contains(pesquisa));
 
             return await Bancadas.ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
-
         }
-
 
 
     }

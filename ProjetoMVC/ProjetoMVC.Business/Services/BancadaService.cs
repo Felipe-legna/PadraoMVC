@@ -1,5 +1,7 @@
 ﻿using ProjetoMVC.Business.Interfaces;
 using ProjetoMVC.Business.Models;
+using ProjetoMVC.Business.Models.Enums;
+using ProjetoMVC.Business.Services.BancadaBuilder;
 using ProjetoMVC.Business.Validation;
 using System;
 using System.Collections.Generic;
@@ -10,6 +12,7 @@ namespace ProjetoMVC.Business.Services
 {
     public class BancadaService : BaseService, IBancadaService
     {
+
         private readonly IBancadaRepository _contexto;
         //private readonly IEnderecoRepository _enderecoRepository;
 
@@ -17,10 +20,39 @@ namespace ProjetoMVC.Business.Services
             //,IEnderecoRepository enderecoRepository
             , INotificador notificador) : base(notificador)
         {
-            _contexto = contexto;
+            _contexto = contexto;            
             //_enderecoRepository = enderecoRepository;
         }
 
+
+
+        public Bancada DefinirTipoBancada(Categoria categoria, string metodoCriacao)
+        {
+            //Bancada bancada = null;
+            Bancada bancada = new Bancada();            
+
+            switch (categoria.Nome)
+            {
+                case "Bancada Reta":                   
+                    bancada = new BancadaEmL().DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);                    
+                    break;
+                case "Bancada Em L":
+                    bancada = new BancadaEmL().DefinirTipoBancada(bancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    break;
+                case "Bancada Em T":
+                    bancada = new BancadaEmT().DefinirTipoBancada(bancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    break;
+                case "Bancada Em U":
+                    bancada = new BancadaEmU().DefinirTipoBancada(bancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    break;
+            }
+
+            return bancada;
+        }
+
+
+
+       
         public async Task Adicionar(Bancada entity)
         {
             //Validar
