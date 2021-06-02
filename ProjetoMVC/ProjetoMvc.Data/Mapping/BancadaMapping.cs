@@ -13,13 +13,13 @@ namespace ProjetoMvc.Data.Mapping
         {
             builder.HasKey(p => p.Id);
 
-            builder.Property(p => p.Nome)
-                .IsRequired()
-                .HasColumnType("VARCHAR(250)");
+            //builder.Property(p => p.Nome)
+            //    .IsRequired()
+            //    .HasColumnType("VARCHAR(250)");
 
-            builder.Property(p => p.Descricao)
-              .IsRequired()
-              .HasColumnType("VARCHAR(250)");
+            //builder.Property(p => p.Descricao)
+            //  .IsRequired()
+            //  .HasColumnType("VARCHAR(250)");
 
             builder.Property(p => p.Imagem)
             .IsRequired()
@@ -31,13 +31,13 @@ namespace ProjetoMvc.Data.Mapping
             builder.Property(p => p.Saia)
                 .HasColumnType("DECIMAL(10,2)");
 
-            builder.Property(p => p.QuantidadePecas)
-                .HasColumnType("INT");
+            //builder.Property(p => p.QuantidadePecas)
+            //    .HasColumnType("INT");
             
-            builder.HasMany(b => b.Pecas);
+            ////builder.HasMany(b => b.Pecas);
 
 
-            builder.HasOne(p => p.Categoria);            
+            //builder.HasOne(p => p.Categoria);            
 
             builder.ToTable("Bancadas");
         }

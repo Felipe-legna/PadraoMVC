@@ -15,6 +15,7 @@
 <table class="table table-hover">
     <thead class="thead-dark">
         <tr>
+            <th></th>
             <th>          
                 Nome
             </th>          
@@ -22,7 +23,7 @@
                 Descricao
             </th>
             <th>
-                Quantidade de Peças
+                Método
             </th>
             <th></th>
         </tr>
@@ -31,6 +32,9 @@
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome)
                 </td>
@@ -42,7 +46,7 @@
                 </td>
                 <td>                
 
-                    @Html.DisplayFor(modelItem => item.QuantidadePecas)
+                    @Html.DisplayFor(modelItem => item.Metodo)
 
                 </td>
                 <td class="text-right">

@@ -20,6 +20,7 @@ namespace ProjetoMVC.Data.Context
         public DbSet<Categoria> Categorias { get; set; }
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Bancada> Bancadas { get; set; }
+        public DbSet<ModeloBancada> ModelosBancadas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

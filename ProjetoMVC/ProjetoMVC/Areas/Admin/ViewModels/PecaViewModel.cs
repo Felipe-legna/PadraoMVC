@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoMVC.Business.Models.Enums;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,7 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         [Range(0, 99999, ErrorMessage = "Permitido apenas númerios maiores que 0."), DataType(DataType.Currency)]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [DisplayName("Sustentação Largura")]
-        public decimal ApoioLargura { get; set; }
+        public TipoSustentacao ApoioLargura { get; set; }
 
         [Range(0, 99999, ErrorMessage = "Permitido apenas númerios maiores que 0."), DataType(DataType.Currency)]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
@@ -32,7 +33,7 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         [Range(0, 99999, ErrorMessage = "Permitido apenas númerios maiores que 0."), DataType(DataType.Currency)]
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [DisplayName("Sustentação Comprimento")]
-        public decimal ApoioComprimento { get; set; }
+        public TipoSustentacao ApoioComprimento { get; set; }
 
         [Range(0, 99999, ErrorMessage = "Permitido apenas númerios maiores que 0."), DataType(DataType.Currency)]
         [DisplayName("Metro Quadrado da Peça")]

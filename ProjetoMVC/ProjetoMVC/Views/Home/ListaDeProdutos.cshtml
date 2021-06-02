@@ -18,53 +18,18 @@
     </div>
     <button type="submit" value="Pesquisar" class="btn btn-info">Pesquisar</button>
 </form>
-@*<table class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th></th>
-            <th>
-                @Html.Display("Nome")
-            </th>
 
-            <th>
-                @Html.Display("Valor")
-            </th>
+@foreach (var item in Model)
+{
 
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="~/imagens/@item.Imagem" alt="@item.Imagem">
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nome)</h5>
+            <p class="card-text"> @Html.DisplayFor(modelItem => item.Valor)</p>
+            <a class="btn btn-primary" asp-controller="Orcamento" asp-action="AdicionarItem" asp-route-id="@item.Id">Adicionar</a>
+        </div>
+    </div>
+}
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>*@
-        @foreach (var item in Model)
-        {
-
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="~/imagens/@item.Imagem" alt="@item.Imagem">
-                <div class="card-body">
-                    <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nome)</h5>
-                    <p class="card-text"> @Html.DisplayFor(modelItem => item.Valor)</p>
-                    <a class="btn btn-primary" asp-controller="Orcamento" asp-action="AdicionarItem" asp-route-id="@item.Id">Adicionar</a>
-                </div>
-            </div>
-
-            @*<tr>
-                <td>
-                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Valor)
-                </td>
-
-
-                <td class="text-right">
-                    <a class="btn btn-info" asp-controller="Orcamento" asp-action="AdicionarItem" asp-route-id="@item.Id"><spam class="fa fa-search"> Adicionar</spam></a>
-
-                </td>
-            </tr>*@
-        }
-    @*</tbody>
-</table>*@
 @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))

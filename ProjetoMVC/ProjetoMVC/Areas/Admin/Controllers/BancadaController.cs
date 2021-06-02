@@ -21,21 +21,24 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         private readonly IMapper _mapper;
         private readonly IBancadaRepository _contexto;
         private readonly IBancadaService _bancadaService;
+        private readonly ICategoriaRepository _categoriaRepository;
         public BancadaController(IMapper mapper,
-            IBancadaRepository bancadaRepository,
-             IBancadaService bancadaService
+                                 IBancadaRepository bancadaRepository,
+                                    IBancadaService bancadaService,
+                                    ICategoriaRepository categoriaRepository
             )
         {
             _mapper = mapper;
             _contexto = bancadaRepository;
             _bancadaService = bancadaService;
+            _categoriaRepository = categoriaRepository;
         }
 
         [Route("lista-de-bancadas")]
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
         {
             IPagedList dadosPaginados = _mapper.Map<IEnumerable<BancadaViewModel>>(await _contexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
-           
+
             return View(dadosPaginados);
         }
 
@@ -54,9 +57,10 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         }
 
         [Route("nova-bancada")]
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             //ViewBag.TiposBancadas = _bancadaService.ObterTiposBancadas();
+            ViewBag.Categorias = _mapper.Map<List<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
             return View();
         }
 
@@ -117,7 +121,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             }
 
 
-            modeloAtualizacao.QuantidadePecas = modeloViewModel.QuantidadePecas;
+            //modeloAtualizacao.QuantidadePecas = modeloViewModel.QuantidadePecas;
 
 
 
@@ -186,12 +190,12 @@ namespace ProjetoMVC.Areas.Admin.Controllers
 
             Bancada bancada = new Bancada
             {
-                Nome = modeloBancada.Nome,
-                Descricao = modeloBancada.Descricao,
+                //Nome = modeloBancada.Nome,
+                //Descricao = modeloBancada.Descricao,
                 Frontao = bancadaViewModel.Frontao,
                 Saia = bancadaViewModel.Saia,
                 //Pecas = _mapper.Map<List<Peca>>(bancadaViewModel.Pecas),
-                QuantidadePecas = bancadaViewModel.QuantidadePecas
+                //QuantidadePecas = bancadaViewModel.QuantidadePecas
             };
             //bancada.Pecas = new List<Peca>();
             //foreach (var p in bancadaViewModel.Pecas)

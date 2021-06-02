@@ -16,18 +16,18 @@ namespace ProjetoMVC.Business.Validation
             //    .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
 
 
-            RuleFor(c => c.Nome)
-                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
-                .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+            //RuleFor(c => c.Nome)
+            //    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            //    .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
 
 
-            RuleFor(c => c.Descricao)
-                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
-                .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
+            //RuleFor(c => c.Descricao)
+            //    .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            //    .Length(2, 100).WithMessage("O campo {PropertyName} precisa ter entre {MinLength} e {MaxLength} caracteres");
 
-            RuleFor(c => c.QuantidadePecas)
-              .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
-              .GreaterThan(0);
+            //RuleFor(c => c.QuantidadePecas)
+            //  .NotEmpty().WithMessage("O campo {PropertyName} precisa ser fornecido")
+            //  .GreaterThan(0);
 
 
         }

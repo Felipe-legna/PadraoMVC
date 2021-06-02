@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoMVC.Data.Context;
 
 namespace ProjetoMvc.Data.Migrations
 {
     [DbContext(typeof(ProjetoMVCContext))]
-    partial class ProjetoMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20210602200209_Removendo peças do mapping do DAta")]
+    partial class RemovendopeçasdomappingdoDAta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,6 +27,13 @@ namespace ProjetoMvc.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("CategoriaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(250)");
+
                     b.Property<decimal>("Frontao")
                         .HasColumnType("DECIMAL(10,2)");
 
@@ -32,18 +41,25 @@ namespace ProjetoMvc.Data.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(450)");
 
+                    b.Property<string>("Metodo")
+                        .HasColumnType("VARCHAR(100)");
+
                     b.Property<decimal>("MetroQuadrado")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<Guid?>("ModeloBancadaId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(250)");
+
+                    b.Property<int>("QuantidadePecas")
+                        .HasColumnType("INT");
 
                     b.Property<decimal>("Saia")
                         .HasColumnType("DECIMAL(10,2)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ModeloBancadaId");
+                    b.HasIndex("CategoriaId");
 
                     b.ToTable("Bancadas");
                 });
@@ -93,36 +109,6 @@ namespace ProjetoMvc.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Clientes");
-                });
-
-            modelBuilder.Entity("ProjetoMVC.Business.Models.ModeloBancada", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("CategoriaId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Descricao")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)");
-
-                    b.Property<string>("Metodo")
-                        .HasColumnType("VARCHAR(100)");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("VARCHAR(250)");
-
-                    b.Property<int>("QuantidadePecas")
-                        .HasColumnType("INT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoriaId");
-
-                    b.ToTable("ModelosBancadas");
                 });
 
             modelBuilder.Entity("ProjetoMVC.Business.Models.Peca", b =>
@@ -206,9 +192,9 @@ namespace ProjetoMvc.Data.Migrations
 
             modelBuilder.Entity("ProjetoMVC.Business.Models.Bancada", b =>
                 {
-                    b.HasOne("ProjetoMVC.Business.Models.ModeloBancada", "ModeloBancada")
+                    b.HasOne("ProjetoMVC.Business.Models.Categoria", "Categoria")
                         .WithMany()
-                        .HasForeignKey("ModeloBancadaId");
+                        .HasForeignKey("CategoriaId");
                 });
 
             modelBuilder.Entity("ProjetoMVC.Business.Models.Categoria", b =>
@@ -216,13 +202,6 @@ namespace ProjetoMvc.Data.Migrations
                     b.HasOne("ProjetoMVC.Business.Models.Categoria", "CategoriaPai")
                         .WithMany()
                         .HasForeignKey("CategoriaPaiId");
-                });
-
-            modelBuilder.Entity("ProjetoMVC.Business.Models.ModeloBancada", b =>
-                {
-                    b.HasOne("ProjetoMVC.Business.Models.Categoria", "Categoria")
-                        .WithMany()
-                        .HasForeignKey("CategoriaId");
                 });
 
             modelBuilder.Entity("ProjetoMVC.Business.Models.Peca", b =>
