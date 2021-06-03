@@ -13,38 +13,18 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         [Key]
         public Guid Id { get; set; }
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Nome { get; set; }
-
-
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Descricao { get; set; }
-
-
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public string Metodo { get; set; }
-
-
-        [DisplayName("Imagem do Material")]
-        public IFormFile ImagemUpload { get; set; }
-        public string Imagem { get; set; }
-
-
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public CategoriaViewModel Categoria { get; set; }
-
-
+        [DisplayName("Frontão")]
         public decimal Frontao { get; set; }
         public decimal Saia { get; set; }
 
-        [Range(0, 99999, ErrorMessage = "Permitido apenas númerios maiores que 0."), DataType(DataType.Currency)]
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
-        public int QuantidadePecas { get; set; }
-
         public List<PecaViewModel> Pecas { get; set; }
 
+        [DisplayName("M² Quadrado")]
         public decimal MetroQuadrado { get; set; }
 
-        
+        public Guid? ModeloBancadaId { get; set; }
+        public ModeloBancadaViewModel ModeloBancada { get; set; }
+
+
     }
 }

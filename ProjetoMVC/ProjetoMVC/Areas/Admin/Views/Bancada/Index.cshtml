@@ -32,23 +32,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                @*<td>
-                        @this.FormataDocumento(item.TipoCategoria, item.Documento)
-                    </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                <td>                
-
-                    @Html.DisplayFor(modelItem => item.Metodo)
-
-                </td>
+              
                 <td class="text-right">
                     <a class="btn btn-info" asp-action="dados-da-bancada" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
                     <a class="btn btn-warning" asp-area="Admin" asp-action="editar-bancada" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>

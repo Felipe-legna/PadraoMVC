@@ -1,0 +1,63 @@
+﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.ModeloBancadaViewModel>
+@{
+    ViewData["Title"] = "Index";
+    var pesquisa = Context.Request.Query["pesquisa"];
+}
+
+<h1>Index</h1>
+
+
+
+<p>
+    <a class="btn btn-info" asp-action="novo-modelo-de-bancada">Novo Modelo</a>
+</p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th></th>
+            <th>
+                Nome
+            </th>
+            <th>
+                Descricao
+            </th>
+            <th>
+                Método
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </td>
+                @*<td>
+                        @this.FormataDocumento(item.TipoCategoria, item.Documento)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.Metodo)
+
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-info" asp-action="dados-do-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>
+                    <a class="btn btn-warning" asp-area="Admin" asp-action="editar-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-pencil-alt"></spam></a>
+                    <a class="btn btn-danger" asp-action="excluir-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, pesquisa = pesquisa }))

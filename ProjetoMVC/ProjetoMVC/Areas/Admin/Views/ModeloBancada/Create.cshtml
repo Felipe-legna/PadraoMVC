@@ -1,4 +1,5 @@
-﻿@model ProjetoMVC.App.Areas.Admin.ViewModels.BancadaViewModel
+﻿
+@model ProjetoMVC.App.Areas.Admin.ViewModels.ModeloBancadaViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,30 +11,29 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form enctype="multipart/form-data" asp-action="create">
+        <form enctype="multipart/form-data" asp-action="adicionar-modelo-de-bancada">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 @*<label asp-for="Categoria" class="control-label">Categoria</label>
-            <select asp-for="Categoria" class="form-control">
-                @for (int i = 0; i < ViewBag.TiposBancadas.Count; i++)
-                {
-                    <option value="@i"> @ViewBag.TiposBancadas[i]</option>
-                }
+                    <select asp-for="Categoria" class="form-control">
+                        @for (int i = 0; i < ViewBag.TiposBancadas.Count; i++)
+                        {
+                            <option value="@i"> @ViewBag.TiposBancadas[i]</option>
+                        }
 
-            </select>*@
+                    </select>*@
 
-            </div>
-        
-            @*<div class="form-group">
-                <label asp-for="Frontao" class="control-label"></label>
-                <input asp-for="Frontao" class="form-control" />
-                <span asp-validation-for="Frontao" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Saia" class="control-label"></label>
-                <input asp-for="Saia" class="form-control" />
-                <span asp-validation-for="Saia" class="text-danger"></span>
+                <label asp-for="Nome" class="control-label"></label>
+                <input asp-for="Nome" class="form-control" />
+                <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>           
             <div class="form-group">
                 <label asp-for="ImagemUpload" class="control-label"></label>
 
@@ -49,7 +49,7 @@
                 <label asp-for="QuantidadePecas" class="control-label"></label>
                 <input asp-for="QuantidadePecas" class="form-control" />
                 <span asp-validation-for="QuantidadePecas" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

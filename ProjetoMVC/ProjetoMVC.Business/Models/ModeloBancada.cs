@@ -9,9 +9,10 @@ namespace ProjetoMVC.Business.Models
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public string Metodo { get; set; }
-        
+        public string Imagem { get; set; }
+
         //OOP
-        public Guid? CategoriaId { get; set; }
+        public Guid CategoriaId { get; set; }
         public Categoria Categoria { get; set; }
         public int QuantidadePecas { get; set; }
     }

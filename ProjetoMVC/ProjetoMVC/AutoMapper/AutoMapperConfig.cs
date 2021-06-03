@@ -19,7 +19,8 @@ namespace MgMarmore.Site.AutoMapper
             CreateMap<Produto, ProdutoViewModel>().ReverseMap();
             CreateMap<Peca, PecaViewModel>().ReverseMap();
             CreateMap<Bancada, BancadaViewModel>().ReverseMap();
-            
+            CreateMap<ModeloBancada, ModeloBancadaViewModel>().ReverseMap();
+
             //CreateMap<Item, ItemViewModel>().ReverseMap();
             //CreateMap<Endereco, EnderecoViewModel>().ReverseMap();
 
