@@ -23,8 +23,7 @@ namespace ProjetoMVC.Site.Configurations
             //services.AddScoped<IProdutoService, ProdutoService>();
             //services.AddScoped<IProdutoRepository, ProdutoRepository>();
 
-            ////services.AddScoped<ICategoriaMaterialRepository, CategoriaMaterialRepository>();
-            ////services.AddScoped<ICategoriaMaterialService, CategoriaMaterialService>();
+
             ////services.AddScoped<IMaterialService, MaterialService>();
             ////services.AddScoped<IMaterialRepository, MaterialRepository>();
 

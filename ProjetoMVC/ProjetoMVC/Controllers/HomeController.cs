@@ -16,19 +16,19 @@ namespace ProjetoMVC.Controllers
     {
         private readonly IClienteRepository _clienteContexto;
         private readonly IProdutoRepository _produtoContexto;        
-        private readonly IBancadaRepository _bancadaRepository;
+        private readonly IModeloBancadaRepository _modeloBancadaRepository;
         private readonly ICategoriaRepository _categoriaContexto;
         private readonly IMapper _mapper;
 
-        public HomeController(          IClienteRepository clienteContexto,
-                                        IProdutoRepository produtoContexto,
-                                        IBancadaRepository bancadaRepository,
-                                        ICategoriaRepository categoriaContexto,
-                                        IMapper mapper)
+        public HomeController( IClienteRepository clienteContexto,
+                               IProdutoRepository produtoContexto,
+                               IModeloBancadaRepository modeloBancadaRepository,
+                               ICategoriaRepository categoriaContexto,
+                               IMapper mapper)
         {
             _clienteContexto = clienteContexto;
             _produtoContexto = produtoContexto;
-            _bancadaRepository = bancadaRepository;
+            _modeloBancadaRepository = modeloBancadaRepository;
             _categoriaContexto = categoriaContexto;
             _mapper = mapper;
 
@@ -49,17 +49,14 @@ namespace ProjetoMVC.Controllers
             IPagedList dadosPaginados = _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoContexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
             return View(dadosPaginados);
         }
+                       
 
-
-        [Route("lista-de-bancadas")]
-        public async Task<IActionResult> ListaDeBancadas(int? pagina, string pesquisa)
+        [Route("lista-de-modelos-de-bancadas")]
+        public async Task<IActionResult> ListaDeModelosBancadas(int? pagina, string pesquisa)
         {
-            IPagedList dadosPaginados = _mapper.Map<IEnumerable<BancadaViewModel>>(await _bancadaRepository.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
+            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ModeloBancadaViewModel>>(await _modeloBancadaRepository.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
             return View(dadosPaginados);
         }
-
-
-
 
     }
 }

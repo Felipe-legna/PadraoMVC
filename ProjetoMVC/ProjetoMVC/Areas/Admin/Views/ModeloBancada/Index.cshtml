@@ -6,11 +6,16 @@
 
 <h1>Modelos de Bancadas</h1>
 
-
-
 <p>
     <a class="btn btn-info" asp-action="novo-modelo-de-bancada">Novo Modelo</a>
 </p>
+<form method="get">
+    <div class="form-group">
+        <label for="pesquisa" class="control-label"></label>
+        <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
+    </div>
+    <button type="submit" value="Pesquisar" class="btn btn-info">Pesquisar</button>
+</form>
 
 <table class="table table-hover">
     <thead class="thead-dark">
