@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjetoMVC.App.Areas.Admin.ViewModels;
 
 using ProjetoMVC.Business.Interfaces;
@@ -58,9 +59,8 @@ namespace ProjetoMVC.Areas.Admin.Controllers
 
         [Route("novo-modelo-de-bancada")]
         public async Task<IActionResult> Create()
-        {
-            //ViewBag.TiposBancadas = _bancadaService.ObterTiposBancadas();
-            ViewBag.Categorias = _mapper.Map<List<CategoriaViewModel>>(await _categoriaRepository.ObterTodos());
+        {               
+            ViewBag.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos()).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             return View();
         }
 
@@ -91,23 +91,33 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         public async Task<IActionResult> Edit(Guid id)
         {
             var modeloViewModel = _mapper.Map<ModeloBancadaViewModel>(await _contexto.ObterPorId(id));
-
+            ViewBag.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos()).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
+            //ViewBag.Categorias = _mapper.Map<IEnumerable<CategoriaViewModel>>(await _categoriaRepository.ObterTodos()).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             if (modeloViewModel == null) return NotFound();
 
             return View(modeloViewModel);
         }
 
 
-        [Route("editar-modelo-de-bancada/{id:Guid}")]
+        [Route("editar-modelo-de-bancada")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Categoria,Frontao,Saia,Metodo,Imagem,QuantidadePecas,MetroQuadrado")] ModeloBancadaViewModel modeloViewModel)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Nome,Descricao,Metodo,Metodo,ImagemUpload,CategoriaId,QuantidadePecas")] ModeloBancadaViewModel modeloViewModel)
         {
             if (id != modeloViewModel.Id) return NotFound();
 
             var modeloAtualizacao = await _contexto.ObterPorId(id);
-            modeloViewModel.Imagem = modeloAtualizacao.Imagem;
+           
+            
             if (!ModelState.IsValid) return View(modeloViewModel);
+
+            modeloAtualizacao.Nome = modeloViewModel.Nome;
+            modeloAtualizacao.Descricao = modeloViewModel.Descricao;
+            modeloAtualizacao.Metodo = modeloViewModel.Metodo;
+            modeloAtualizacao.CategoriaId = modeloViewModel.CategoriaId;
+            modeloAtualizacao.Imagem = modeloViewModel.Imagem;
+            modeloAtualizacao.QuantidadePecas = modeloViewModel.QuantidadePecas;
+
 
             if (modeloViewModel.ImagemUpload != null)
             {
@@ -141,8 +151,8 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             return View(modeloViewModel);
         }
 
-        [Route("excluir-modelo-de-bancada/{id:Guid}")]
-        [HttpPost, ActionName("Delete")]
+        [Route("excluir-modelo-de-bancada")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {

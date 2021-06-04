@@ -12,23 +12,21 @@ using X.PagedList;
 
 namespace ProjetoMvc.Data.Repository
 {
-    public class ModeloBancadaRepository : Repository<ModeloBancada>, IModeloBancadaRepository
+    public class BancadaRepository : Repository<Bancada>, IBancadaRepository
     {
-        public ModeloBancadaRepository(ProjetoMVCContext context) : base(context) { }
+        public BancadaRepository(ProjetoMVCContext context) : base(context) { }
 
-
-        public async Task<IPagedList<ModeloBancada>> ObterTodosPaginados(int? pagina, string pesquisa)
+        public async Task<IPagedList<Bancada>> ObterTodosPaginados(int? pagina, string pesquisa)
         {
             int numeroPagina = pagina ?? 1;
 
-            var Bancadas = Db.ModelosBancadas.AsQueryable();
+            var Bancadas = Db.Bancadas.Include(mb => mb.ModeloBancada).AsQueryable();
 
             if (!String.IsNullOrEmpty(pesquisa))
-                Bancadas = Bancadas.Where(c => c.Nome.Contains(pesquisa));
+                Bancadas = Bancadas.Where(c => c.ModeloBancada.Nome.Contains(pesquisa));
 
             return await Bancadas.ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
         }
-
 
     }
 }

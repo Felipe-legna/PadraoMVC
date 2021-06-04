@@ -2,28 +2,18 @@
 @model ProjetoMVC.App.Areas.Admin.ViewModels.ModeloBancadaViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Criar Novo Modelo de Bancada";
 }
 
-<h1>Create</h1>
+<h1>Novo Modelo de Bancada</h1>
 
-<h4>ModeloViewModel</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form enctype="multipart/form-data" asp-action="adicionar-modelo-de-bancada">
+        <form enctype="multipart/form-data" asp-action="novo-modelo-bancada">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                @*<label asp-for="Categoria" class="control-label">Categoria</label>
-                    <select asp-for="Categoria" class="form-control">
-                        @for (int i = 0; i < ViewBag.TiposBancadas.Count; i++)
-                        {
-                            <option value="@i"> @ViewBag.TiposBancadas[i]</option>
-                        }
 
-                    </select>*@
-
-            </div>
             <div class="form-group">
                 <label asp-for="Nome" class="control-label"></label>
                 <input asp-for="Nome" class="form-control" />
@@ -33,7 +23,12 @@
                 <label asp-for="Descricao" class="control-label"></label>
                 <input asp-for="Descricao" class="form-control" />
                 <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>           
+            </div>
+            <div class="form-group">
+                <label asp-for="Metodo" class="control-label"></label>
+                <input asp-for="Metodo" class="form-control" />
+                <span asp-validation-for="Metodo" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label asp-for="ImagemUpload" class="control-label"></label>
 
@@ -46,20 +41,28 @@
                 <span asp-validation-for="ImagemUpload" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="CategoriaId" class="control-label"></label>
+                <select asp-for="CategoriaId" class="form-control" asp-items="ViewBag.Categorias">
+                    <option value="">Selecione</option>
+                </select>
+                <span asp-validation-for="CategoriaId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="QuantidadePecas" class="control-label"></label>
                 <input asp-for="QuantidadePecas" class="form-control" />
                 <span asp-validation-for="QuantidadePecas" class="text-danger"></span>
             </div>
+            
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Adicionar" class="btn btn-primary" /> |
+                <a class="btn btn-info" asp-action="Index">Voltar</a>
+                @*<a class="btn btn-info" asp-action="Index">Cadastrar</a>*@
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

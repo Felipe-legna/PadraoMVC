@@ -34,7 +34,7 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         
         public Guid CategoriaId { get; set; }
 
-        [Required(ErrorMessage = "O campo {0} é obrigatório")]
+        //[Required(ErrorMessage = "O campo {0} é obrigatório")]
         public CategoriaViewModel Categoria { get; set; }
 
 
