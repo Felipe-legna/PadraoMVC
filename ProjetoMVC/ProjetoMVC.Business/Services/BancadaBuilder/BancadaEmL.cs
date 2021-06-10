@@ -1,4 +1,5 @@
 ﻿using ProjetoMVC.Business.Interfaces;
+using ProjetoMVC.Business.Interfaces.BancadaBuilder;
 using ProjetoMVC.Business.Models;
 using System;
 using System.Collections.Generic;
@@ -7,14 +8,10 @@ using System.Text;
 
 namespace ProjetoMVC.Business.Services.BancadaBuilder
 {
-    public class BancadaEmL 
+    public class BancadaEmL : IBancadaEmL
     {
         private readonly IBancadaBuilder _bancada;
-
-        public BancadaEmL()
-        {
-
-        }
+               
 
         public BancadaEmL(IBancadaBuilder bancada)
         {

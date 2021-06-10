@@ -45,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.Metodo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Categoria)
+                @Html.DisplayFor(modelItem => item.Categoria.Nome)
             </td>
             <td class="text-right">
                 <a class="btn btn-info" asp-action="dados-do-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-search"></spam></a>

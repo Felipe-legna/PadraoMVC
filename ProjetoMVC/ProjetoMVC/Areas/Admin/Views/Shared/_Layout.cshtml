@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/paged-list/PagedList.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap-sweetalert/sweetalert.min.css"  />
 </head>
 <body>
     <header>
@@ -21,7 +22,7 @@
                     <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Cliente" asp-action="lista-de-clientes" >Home</a>
+                            <a class="nav-link text-dark" asp-area="Admin" asp-controller="Cliente" asp-action="lista-de-clientes">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
@@ -45,6 +46,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/bootstrap-sweetalert/sweetalert.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @RenderSection("Scripts", required: false)

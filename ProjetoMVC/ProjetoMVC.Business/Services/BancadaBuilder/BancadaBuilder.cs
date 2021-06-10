@@ -28,14 +28,14 @@ namespace ProjetoMVC.Business.Services.BancadaBuilder
 
         public IBancadaBuilder AdicionarPeca(Peca peca, Func<decimal, decimal> apoioLargura, Func<decimal, decimal> apoioComprimento)
         {
-            var totalLarguraPeca = apoioLargura(peca.LarguraPeca);
-            var totalComprimentoPeca = apoioComprimento(peca.ComprimentoPeca);
+            var totalLarguraPeca = apoioLargura(peca.Largura);
+            var totalComprimentoPeca = apoioComprimento(peca.Comprimento);
 
             var novaPeca = new Peca()
             {
-                LarguraPeca = peca.LarguraPeca,
+                Largura = peca.Largura,
                 TotalLarguraPeca = totalLarguraPeca,
-                ComprimentoPeca = peca.ComprimentoPeca,
+                Comprimento = peca.Comprimento,
                 TotalComprimentoPeca = totalComprimentoPeca
             };
 

@@ -1,4 +1,5 @@
 ﻿using ProjetoMVC.Business.Interfaces;
+using ProjetoMVC.Business.Interfaces.BancadaBuilder;
 using ProjetoMVC.Business.Models;
 using ProjetoMVC.Business.Models.Enums;
 using ProjetoMVC.Business.Services.BancadaBuilder;
@@ -14,36 +15,51 @@ namespace ProjetoMVC.Business.Services
     {
 
         private readonly IBancadaRepository _contexto;
-        //private readonly IEnderecoRepository _enderecoRepository;
+        private readonly IBancadaReta _bancadaReta;
+        private readonly IBancadaEmL _bancadaEmL;
+        private readonly IBancadaEmU _bancadaEmU;
+        private readonly IBancadaEmT _bancadaEmT;
 
-        public BancadaService(IBancadaRepository contexto
-            //,IEnderecoRepository enderecoRepository
-            , INotificador notificador) : base(notificador)
+        public BancadaService(IBancadaRepository contexto,
+                                IBancadaReta bancadaReta,
+                                IBancadaEmL bancadaEmL,
+                                IBancadaEmU bancadaEmU,
+                                IBancadaEmT bancadaEmT,
+                                INotificador notificador) : base(notificador)
         {
-            _contexto = contexto;            
+            _bancadaReta = bancadaReta;
+            _bancadaEmL = bancadaEmL;
+            _bancadaEmU = bancadaEmU;
+            _bancadaEmT = bancadaEmT;
+            _contexto = contexto;
             //_enderecoRepository = enderecoRepository;
         }
 
 
 
-        public Bancada DefinirTipoBancada(Categoria categoria, string metodoCriacao)
+        public Bancada DefinirTipoBancada(string categoria, string metodoCriacao, decimal frontao, decimal saia, List<Peca> pecas)
         {
             //Bancada bancada = null;
-            Bancada bancada = new Bancada();            
-
-            switch (categoria.Nome)
+            Bancada bancada = new Bancada()
             {
-                case "Bancada Reta":                   
-                    bancada = new BancadaEmL().DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);                    
+                Frontao = frontao,
+                Saia = saia,
+                Pecas = pecas
+            };
+
+            switch (categoria)
+            {
+                case "Bancada Reta":
+                    bancada = _bancadaReta.DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
                 case "Bancada Em L":
-                    bancada = new BancadaEmL().DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    bancada = _bancadaEmL.DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
                 case "Bancada Em T":
-                    bancada = new BancadaEmT().DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    bancada = _bancadaEmT.DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
                 case "Bancada Em U":
-                    bancada = new BancadaEmU().DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    bancada = _bancadaEmU.DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
             }
 
@@ -52,7 +68,7 @@ namespace ProjetoMVC.Business.Services
 
 
 
-       
+
         public async Task Adicionar(Bancada entity)
         {
             //Validar

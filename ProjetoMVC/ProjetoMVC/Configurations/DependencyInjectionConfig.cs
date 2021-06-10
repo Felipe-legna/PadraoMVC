@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ProjetoMvc.Data.Repository;
 using ProjetoMVC.Business.Interfaces;
+using ProjetoMVC.Business.Interfaces.BancadaBuilder;
 using ProjetoMVC.Business.Notifications;
 using ProjetoMVC.Business.Services;
+using ProjetoMVC.Business.Services.BancadaBuilder;
 using ProjetoMVC.Data.Context;
 using ProjetoMVC.Data.Repository;
 using ProjetoMVC.Site.lib.orcamento;
@@ -40,34 +42,17 @@ namespace ProjetoMVC.Site.Configurations
 
             services.AddScoped<IBancadaRepository, BancadaRepository>();
             services.AddScoped<IBancadaService, BancadaService>();
+           
+            services.AddScoped<IBancadaBuilder, BancadaBuilder>();
+            services.AddScoped<IBancadaReta, BancadaReta>();
+            services.AddScoped<IBancadaEmL, BancadaEmL>();
+            services.AddScoped<IBancadaEmT, BancadaEmT>();
+            services.AddScoped<IBancadaEmU, BancadaEmU>();
 
             services.AddScoped<IModeloBancadaRepository, ModeloBancadaRepository>();
             services.AddScoped<IModeloBancadaService, ModeloBancadaService>();
 
-            //services.AddScoped<IEnderecoRepository, EnderecoRepository>();
-            //services.AddScoped<IClienteService, ClienteService>();
-
-
-
-
-            //services.AddScoped<IOrcamentoRepository, OrcamentoRepository>();
-
-
-            //services.AddScoped<IServicoRepository, ServicoRepository>();
-            //services.AddScoped<IRevendaRepository, RevendaRepository>();
-
-
-            //services.AddScoped<IBancadaBuilder, BancadaBuilder>();
-
-
-
-            //services.AddScoped<IItemService, ItemService>();
-
-            //services.AddScoped<IOrcamentoService, OrcamentoService>();
-
-            //services.AddScoped<IServicoService, ServicoService>();
-
-            //services.AddScoped<IModeloBancadaService, ModeloBancadaService>();
+            
 
 
             //services.AddScoped<IBancadaRetaService, BancadaRetaService>();

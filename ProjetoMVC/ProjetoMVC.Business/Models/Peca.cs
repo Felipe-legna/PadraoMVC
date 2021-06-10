@@ -7,10 +7,10 @@ namespace ProjetoMVC.Business.Models
 {
     public class Peca : Entity
     {
-        public decimal LarguraPeca { get; set; }
+        public decimal Largura { get; set; }
         public TipoSustentacao ApoioLargura { get; set; }
         public decimal TotalLarguraPeca { get; set; }
-        public decimal ComprimentoPeca { get; set; }        
+        public decimal Comprimento { get; set; }        
         public TipoSustentacao ApoioComprimento { get; set; }
         public decimal ComprimentoFogaoEmbutido { get; set; }
         public TipoBase Base { get; set; }

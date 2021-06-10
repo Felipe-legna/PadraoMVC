@@ -21,7 +21,7 @@
             <th></th>
             <th>Nome</th>
             <th>Descricao</th>
-            <th>Categoria</th>
+            
             <th hidden></th>
         </tr>
     </thead>
@@ -38,14 +38,15 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Categoria.Nome)
-                </td>
+                
                 <td class="text-right" hidden>
                     @*<a class="btn btn-info" asp-action="adicionar-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-search">Selecionar</spam></a>*@
                     @*<a id="@item.Id" class="btn btn-info selecionarBancada">Selecionar</a>*@
                     <div class="id">@item.Id</div>
                     <div class="quantidadePecas">@item.QuantidadePecas</div>
+                    <div class="metodo">@item.Metodo</div>
+                    <div class="categoria">@item.Categoria.Nome</div>
+
                 </td>
             </tr>
         }

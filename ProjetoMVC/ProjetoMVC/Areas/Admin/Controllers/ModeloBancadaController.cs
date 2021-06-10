@@ -107,8 +107,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             if (id != modeloViewModel.Id) return NotFound();
 
             var modeloAtualizacao = await _contexto.ObterPorId(id);
-           
-            
+                       
             if (!ModelState.IsValid) return View(modeloViewModel);
 
             modeloAtualizacao.Nome = modeloViewModel.Nome;
@@ -117,7 +116,6 @@ namespace ProjetoMVC.Areas.Admin.Controllers
             modeloAtualizacao.CategoriaId = modeloViewModel.CategoriaId;
             modeloAtualizacao.Imagem = modeloViewModel.Imagem;
             modeloAtualizacao.QuantidadePecas = modeloViewModel.QuantidadePecas;
-
 
             if (modeloViewModel.ImagemUpload != null)
             {
@@ -130,13 +128,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
                 modeloAtualizacao.Imagem = imgPrefixo + modeloViewModel.ImagemUpload.FileName;
             }
 
-
-            //modeloAtualizacao.QuantidadePecas = modeloViewModel.QuantidadePecas;
-
-
-
             await _contexto.Atualizar(_mapper.Map<ModeloBancada>(modeloAtualizacao));
-
 
             return RedirectToAction("Index");
         }

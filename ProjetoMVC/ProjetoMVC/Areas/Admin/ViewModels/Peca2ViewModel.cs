@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoMVC.App.Areas.Admin.ViewModels
 {
-    public class PecaViewModel
+    public class Peca2ViewModel
     {
         [Key]
         public Guid Id { get; set; }

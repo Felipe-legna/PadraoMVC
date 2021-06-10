@@ -17,7 +17,7 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         public decimal Frontao { get; set; }
         public decimal Saia { get; set; }
 
-        public List<PecaViewModel> Pecas { get; set; }
+        public List<Peca2ViewModel> Pecas { get; set; }
 
         [DisplayName("M² Quadrado")]
         public decimal MetroQuadrado { get; set; }

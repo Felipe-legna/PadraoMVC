@@ -21,7 +21,7 @@ namespace ProjetoMvc.Data.Repository
         {
             int numeroPagina = pagina ?? 1;
 
-            var Bancadas = Db.ModelosBancadas.AsQueryable();
+            var Bancadas = Db.ModelosBancadas.Include(c => c.Categoria).AsQueryable();
 
             if (!String.IsNullOrEmpty(pesquisa))
                 Bancadas = Bancadas.Where(c => c.Nome.Contains(pesquisa));
