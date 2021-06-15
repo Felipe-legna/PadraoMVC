@@ -23,8 +23,10 @@ namespace MgMarmore.Site.AutoMapper
             CreateMap<Bancada, BancadaViewModel>().ReverseMap();
             CreateMap<ModeloBancada, ModeloBancadaViewModel>().ReverseMap();
 
-            
-            
+            CreateMap<Material, MaterialViewModel>().ReverseMap();
+
+
+
             // Area Cliente
             CreateMap<Peca, PecaViewModel>().ReverseMap();
 

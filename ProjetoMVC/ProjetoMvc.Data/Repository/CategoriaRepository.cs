@@ -30,6 +30,10 @@ namespace ProjetoMvc.Data.Repository
 
         }
 
+        public override async Task<List<Categoria>> ObterTodos()
+        {
+            return await Db.Categorias.Include(c=> c.CategoriaPai).ToListAsync();
+        }
 
 
     }

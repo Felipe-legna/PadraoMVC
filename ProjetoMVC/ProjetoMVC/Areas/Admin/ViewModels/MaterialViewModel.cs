@@ -9,19 +9,16 @@ using System.Threading.Tasks;
 
 namespace ProjetoMVC.App.Areas.Admin.ViewModels
 {
-    public class ProdutoViewModel
-    {
+    public class MaterialViewModel
+    {     
         public Guid Id { get; set; }
         [JsonIgnore]
         public string Nome { get; set; }
-        [JsonIgnore]
-        public string Descricao { get; set; }
         
         [JsonIgnore]
         public decimal Valor { get; set; }
         
-        [JsonIgnore]
-        public int Quantidade { get; set; }
+ 
 
         [DisplayName("Imagem do Material")]
         [JsonIgnore]
@@ -29,7 +26,11 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         
         [JsonIgnore]
         public string Imagem { get; set; }
-       
+
+
+        [DisplayName("Atrelado ao Dólar?")]
+        public bool AtreladoDolar { get; set; }
+
         //banco de dados
         [DisplayName("Categoria Selecionada")]
         public Guid? CategoriaId { get; set; }

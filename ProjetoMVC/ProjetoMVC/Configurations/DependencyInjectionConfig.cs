@@ -52,7 +52,8 @@ namespace ProjetoMVC.Site.Configurations
             services.AddScoped<IModeloBancadaRepository, ModeloBancadaRepository>();
             services.AddScoped<IModeloBancadaService, ModeloBancadaService>();
 
-            
+            services.AddScoped<IMaterialRepository, MaterialRepository>();
+           
 
 
             //services.AddScoped<IBancadaRetaService, BancadaRetaService>();

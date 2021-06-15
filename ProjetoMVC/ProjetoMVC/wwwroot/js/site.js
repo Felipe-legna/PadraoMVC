@@ -71,12 +71,14 @@ function validarNumero(campo, numero) {
         if (isNaN(numero)) {
             errors.push("O campo " + campo + " deve ser um número.\n");
             return;
-        } else if (numero <= 0) {
-            errors.push("O campo " + campo + " deve ser maior que zero.\n");
+        } else if (numero < 0) {
+            errors.push("O campo " + campo + " deve ser maior ou igual a zero.\n");
             return;
         }
 
-    } else {
+    }
+    else if (campo != "Frontão" && campo != "Saia")
+    {
         errors.push("O campo " + campo + " é obrigatório.\n");
         return;
     }

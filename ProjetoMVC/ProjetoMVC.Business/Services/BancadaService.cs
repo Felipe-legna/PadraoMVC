@@ -15,12 +15,14 @@ namespace ProjetoMVC.Business.Services
     {
 
         private readonly IBancadaRepository _contexto;
+        private readonly IMaterialRepository _materialContexto;
         private readonly IBancadaReta _bancadaReta;
         private readonly IBancadaEmL _bancadaEmL;
         private readonly IBancadaEmU _bancadaEmU;
         private readonly IBancadaEmT _bancadaEmT;
 
         public BancadaService(IBancadaRepository contexto,
+                                IMaterialRepository materialContexto,
                                 IBancadaReta bancadaReta,
                                 IBancadaEmL bancadaEmL,
                                 IBancadaEmU bancadaEmU,
@@ -32,6 +34,7 @@ namespace ProjetoMVC.Business.Services
             _bancadaEmU = bancadaEmU;
             _bancadaEmT = bancadaEmT;
             _contexto = contexto;
+            _materialContexto = materialContexto;
             //_enderecoRepository = enderecoRepository;
         }
 
@@ -105,10 +108,49 @@ namespace ProjetoMVC.Business.Services
 
             await _contexto.Remover(id);
         }
+
+
+        public async Task AdicionarMaterial(Material entity)
+        {
+            //Validar
+            if (!ExecutarValidacao(new MaterialValidation(), entity)) return;
+            //Executar
+            await _materialContexto.Adicionar(entity);
+        }
+
+        public async Task AtualizarMaterial(Material entity)
+        {
+            //Validar
+            if (!ExecutarValidacao(new MaterialValidation(), entity)) return;
+            //Executar
+            await _materialContexto.Atualizar(entity);
+        }
+
+
+        //public async Task AtualizarEndereco(Endereco endereco)
+        //{
+        //    if (!ExecutarValidacao(new EnderecoValidation(), endereco)) return;
+
+        //    await _enderecoRepository.Atualizar(endereco);
+        //}
+
+
+        public async Task RemoverMaterial(Guid id)
+        {
+            //var endereco = await _enderecoRepository.ObterEnderecoPorProduto(id);
+
+            //if (endereco != null)
+            //{
+            //    await _enderecoRepository.Remover(endereco.Id);
+            //}
+
+            await _materialContexto.Remover(id);
+        }
         public void Dispose()
         {
             //_enderecoRepository?.Dispose();
             _contexto?.Dispose();
+            _materialContexto?.Dispose();
         }
     }
 }

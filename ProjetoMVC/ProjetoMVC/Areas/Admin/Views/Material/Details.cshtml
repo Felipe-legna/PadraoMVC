@@ -1,0 +1,67 @@
+﻿@model ProjetoMVC.App.Areas.Admin.ViewModels.MaterialViewModel
+
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+   
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nome)
+        </dd>        
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Imagem)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Imagem)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Valor)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Valor)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AtreladoDolar)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AtreladoDolar)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Categoria")
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Categoria.Nome)
+        </dd>
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TiposProdutos)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TiposProdutos)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Ativo)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Ativo)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoriaProduto)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CategoriaProduto.Nome)
+        </dd>*@
+    </dl>
+</div>
+<div>
+    <a class="btn btn-dark" supress-by-claim-name="Produto" supress-by-claim-value="Editar" asp-action="Edit" asp-route-id="@Model.Id">Editar</a>  |
+    <a class="btn btn-info" asp-action="Index">Voltar</a>
+</div>

@@ -13,6 +13,7 @@ using X.PagedList;
 
 namespace ProjetoMVC.Controllers
 {
+    [Route("")]
     [Route("Home")]
     public class HomeController : Controller
     {
@@ -40,6 +41,8 @@ namespace ProjetoMVC.Controllers
         }
 
 
+       
+        [Route("index")]
         [Route("lista-de-clientes")]
         public async Task<IActionResult> ListaDeClientes(int? pagina, string pesquisa)
         {

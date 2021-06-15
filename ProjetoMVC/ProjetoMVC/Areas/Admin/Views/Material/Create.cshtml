@@ -1,4 +1,4 @@
-﻿@model ProjetoMVC.App.Areas.Admin.ViewModels.ProdutoViewModel
+﻿@model ProjetoMVC.App.Areas.Admin.ViewModels.MaterialViewModel
 
 
 @{
@@ -19,11 +19,6 @@
                 <span asp-validation-for="Nome" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ImagemUpload" class="control-label"></label>
 
                 <div class="custom-file">
@@ -41,11 +36,23 @@
                 </select>
                 <span asp-validation-for="CategoriaId" class="text-danger"></span>
             </div>
+
+         
+            <div class="form-group">                
+                <div class="form-check form-check-inline">
+                    <label asp-for="AtreladoDolar" class="control-label"></label>
+                    <input class="form-check-input" type="radio" name="AtreladoDolar" id="exampleRadios1" value="false" asp-for="AtreladoDolar" checked>Não
+                    <input class="form-check-input" type="radio" name="AtreladoDolar" id="exampleRadios2" value="true" asp-for="AtreladoDolar">Sim                   
+                </div>               
+            </div>
             <div class="form-group">
                 <label asp-for="Valor" class="control-label"></label>
                 <input asp-for="Valor" class="form-control" />
                 <span asp-validation-for="Valor" class="text-danger"></span>
             </div>
+
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

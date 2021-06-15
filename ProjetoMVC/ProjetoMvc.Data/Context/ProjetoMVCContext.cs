@@ -21,6 +21,7 @@ namespace ProjetoMVC.Data.Context
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Bancada> Bancadas { get; set; }
         public DbSet<ModeloBancada> ModelosBancadas { get; set; }
+        public DbSet<Material> Materiais { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

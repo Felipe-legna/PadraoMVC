@@ -34,7 +34,7 @@ namespace ProjetoMVC.Business.Services.BancadaBuilder
         }
 
 
-        public Bancada CriarBancadaRetaDoisApoio(decimal frontao, decimal saia, List<Peca> pecas)
+        public Bancada CriarBancadaRetaDoisApoios(decimal frontao, decimal saia, List<Peca> pecas)
         {
             var bancadaReta = _bancada.AdicionarFrontaoSaia(frontao, saia)
                                 .AdicionarPeca(pecas[0], _bancada.AddApoioUmaParede, _bancada.AddApoioUmaParede)
@@ -44,7 +44,7 @@ namespace ProjetoMVC.Business.Services.BancadaBuilder
 
 
 
-        public Bancada CriarBancadaRetaTresApoio(decimal frontao, decimal saia, List<Peca> pecas)
+        public Bancada CriarBancadaRetaTresApoios(decimal frontao, decimal saia, List<Peca> pecas)
         {
             var bancadaReta = _bancada.AdicionarFrontaoSaia(frontao, saia)
                                 .AdicionarPeca(pecas[0], _bancada.AddApoioUmaParede, _bancada.AddApoioDuasParedes)
