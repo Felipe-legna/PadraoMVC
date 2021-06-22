@@ -56,13 +56,13 @@ namespace ProjetoMVC.Business.Services
                     bancada = _bancadaReta.DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
                 case "Bancada Em L":
-                    bancada = _bancadaEmL.DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    bancada = _bancadaEmL.DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
                 case "Bancada Em T":
-                    bancada = _bancadaEmT.DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    bancada = _bancadaEmT.DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
                 case "Bancada Em U":
-                    bancada = _bancadaEmU.DefinirTipoBancada(bancada.ModeloBancada.Metodo, bancada.Frontao, bancada.Saia, bancada.Pecas);
+                    bancada = _bancadaEmU.DefinirTipoBancada(metodoCriacao, bancada.Frontao, bancada.Saia, bancada.Pecas);
                     break;
             }
 

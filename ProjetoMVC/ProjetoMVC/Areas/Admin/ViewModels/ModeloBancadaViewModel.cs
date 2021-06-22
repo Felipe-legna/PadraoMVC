@@ -43,6 +43,8 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         public int QuantidadePecas { get; set; }
 
+        public Guid MaterialId { get; set; }
+        public MaterialViewModel Material { get; set; }
        
 
         

@@ -40,22 +40,26 @@ $(document).ready(function () {
             swal("Ops!", errors, "error");
         else {
             var data = { "categoria": categoria, "metodo": metodo, "frontao": exb(frontao), "saia": exb(saia), "pecasViewModel": pecas };
-            requisicao("POST", data, "adicionar-bancada", adicionarBancada);
+            requisicao("POST", data, "adicionar-bancada", adicionarMaterial);
         }
     });
 })
 
-function adicionarBancada() {
 
-}
 
 function adicionarPecas(quantidadePecas) {
     var pecas = "";
     for (var i = 0; i < quantidadePecas; i++) {
-        pecas = '<div id="peca' + (i + 1) + '" class="row">' + addInput('Peça - ' + (i + 1) + ' Comprimento:', 'comprimento', 6) + ' ' + addInput('Peça - ' + (i + 1) + ' Largura:', 'largura', 6) + '</div>';
+        pecas += '<div id="peca' + (i + 1) + '" class="row">' + addInput('Peça - ' + (i + 1) + ' Comprimento:', 'comprimento', 6) + ' ' + addInput('Peça - ' + (i + 1) + ' Largura:', 'largura', 6) + '</div>';
     }
 
     $("#pecas").append(pecas);
+}
+
+function adicionarMaterial(dados) {
+
+    var teste = dados;
+    var ok = '';
 }
 
 
@@ -108,11 +112,11 @@ function requisicao(tipo, data, metodo, metodoCallback) {
         dataType: 'json',
         data: data,
         beforeSend: function () {
-            ExibirCarregando(true);
+            exibirCarregando(true);
         },
         error: function (response) {
             swal("Ops!", "Erro. Verifique os dados fonte.", "error");
-            ExibirCarregando(false);
+            exibirCarregando(false);
         }
 
     }).done(function (response) {
@@ -121,7 +125,7 @@ function requisicao(tipo, data, metodo, metodoCallback) {
 }
 
 
-function ExibirCarregando(opcao) {
+function exibirCarregando(opcao) {
     if (opcao) {
         $("#carregando").show();
         $("body").css('opacity', '0.6');

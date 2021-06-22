@@ -62,37 +62,62 @@
 <div class="modal fade" id="modelBancada" tabindex="-1" role="dialog" aria-labelledby="modelBancada" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
+            @*<div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Adicionar Medidas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
+            </div>*@
             <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="inputsm">Frontão</label>
-                            <input class="form-control input-sm" id="frontao" type="text" value="">
-                        </div>
+                
+                
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-link active" id="nav-bancada-tab" data-toggle="tab" href="#nav-bancada" role="tab" aria-controls="nav-bancada" aria-selected="true">Bancada</a>
+                        <a class="nav-link" id="nav-material-tab" data-toggle="tab" href="#nav-material" role="tab" aria-controls="nav-material" aria-selected="false">Material</a>                        
                     </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label for="inputsm">Saia</label>
-                            <input class="form-control input-sm" id="saia" type="text">
+                </nav>
+                <!-- Adicionar Bancada-->
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-bancada" role="tabpanel" aria-labelledby="nav-bancada-tab">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="inputsm">Frontão</label>
+                                    <input class="form-control input-sm" id="frontao" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="inputsm">Saia</label>
+                                    <input class="form-control input-sm" id="saia" type="text">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-           
-                <hr />
-                <div id="pecas">
-                    @*Será inserido por javascript de acordo com a quantidade de peças*@
 
-                </div>
+                        <hr />
+                        <div id="pecas">
+                            @*Será inserido por javascript de acordo com a quantidade de peças*@
+                        </div>
+                    </div>
+                    
+    
+                    <!-- Selecionar Material-->
+                    <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <select class="form-control" asp-items="ViewBag.Materiais">
+                                <option value="">Selecione</option>
+                            </select>                            
+                        </div>
+                    
+                    </div>
+                    
+                </div>               
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-                <button id="adicionarBancada" type="button" class="btn btn-primary">Adicionar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="adicionarBancada" type="button" class="btn btn-primary">Continuar</button>
             </div>
         </div>
     </div>

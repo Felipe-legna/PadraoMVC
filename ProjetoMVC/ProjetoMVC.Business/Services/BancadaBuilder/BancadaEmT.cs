@@ -32,7 +32,6 @@ namespace ProjetoMVC.Business.Services.BancadaBuilder
                 _bancada.AdicionarFrontaoSaia(frontao, saia)
                                     .AdicionarPeca(pecas[0], _bancada.AddApoioUmaParede, _bancada.AddSemApoio)
                                     .AdicionarPeca(pecas[1], _bancada.AddSemApoio, _bancada.AddApoioOutraPeca);
-
             }
 
             return _bancada.ObterBancada();
@@ -45,7 +44,6 @@ namespace ProjetoMVC.Business.Services.BancadaBuilder
                 _bancada.AdicionarFrontaoSaia(frontao, saia)
                                     .AdicionarPeca(pecas[0], _bancada.AddApoioUmaParede, _bancada.AddApoioUmaParede)
                                     .AdicionarPeca(pecas[1], _bancada.AddSemApoio, _bancada.AddApoioOutraPeca);
-
             }
 
             return _bancada.ObterBancada();
@@ -58,7 +56,6 @@ namespace ProjetoMVC.Business.Services.BancadaBuilder
                 _bancada.AdicionarFrontaoSaia(frontao, saia)
                                     .AdicionarPeca(pecas[0], _bancada.AddApoioUmaParede, _bancada.AddApoioDuasParedes)
                                     .AdicionarPeca(pecas[1], _bancada.AddSemApoio, _bancada.AddApoioOutraPeca);
-
             }
 
             return _bancada.ObterBancada();

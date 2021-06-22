@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using ProjetoMVC.App.Areas.Admin.ViewModels;
 
 using ProjetoMVC.Business.Interfaces;
@@ -22,6 +23,7 @@ namespace ProjetoMVC.Controllers
         private readonly IModeloBancadaRepository _modeloBancadaRepository;
         private readonly ICategoriaRepository _categoriaContexto;
         private readonly IBancadaService _bancadaService;
+        private readonly IMaterialRepository _materialRepository;
         private readonly IMapper _mapper;
 
         public HomeController( IClienteRepository clienteContexto,
@@ -29,6 +31,7 @@ namespace ProjetoMVC.Controllers
                                IModeloBancadaRepository modeloBancadaRepository,
                                ICategoriaRepository categoriaContexto,
                                IBancadaService bancadaService,
+                               IMaterialRepository materialRepository,
                                IMapper mapper)
         {
             _clienteContexto = clienteContexto;
@@ -36,6 +39,7 @@ namespace ProjetoMVC.Controllers
             _modeloBancadaRepository = modeloBancadaRepository;
             _categoriaContexto = categoriaContexto;
             _bancadaService = bancadaService;
+            _materialRepository = materialRepository;
             _mapper = mapper;
 
         }
@@ -63,16 +67,19 @@ namespace ProjetoMVC.Controllers
         public async Task<IActionResult> ListaDeModelosBancadas(int? pagina, string pesquisa)
         {
             IPagedList dadosPaginados = _mapper.Map<IEnumerable<ModeloBancadaViewModel>>(await _modeloBancadaRepository.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
+            ViewBag.Materiais = _mapper.Map<IEnumerable<MaterialViewModel>>(await _materialRepository.ObterTodos()).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
+            
             return View(dadosPaginados);
         }
 
        [Route("adicionar-bancada")]
         public IActionResult AdicionarBancada(string categoria, string metodo, string frontao, string saia, List<PecaViewModel> pecasViewModel)//, decimal frontao, decimal saia
-        {            
+        {           
+
             List<Peca> pecas = _mapper.Map<List<Peca>>(pecasViewModel);
-             _bancadaService.DefinirTipoBancada(categoria, metodo, Convert.ToDecimal(frontao), Convert.ToDecimal(saia), pecas);
-            
-            return View("lista-de-modelos-de-bancadas");
+             var bancada = _bancadaService.DefinirTipoBancada(categoria, metodo, Convert.ToDecimal(frontao), Convert.ToDecimal(saia), pecas);
+            string metrosQuadrados = bancada.MetroQuadrado.ToString();
+            return new JsonResult(metrosQuadrados);
         }
                
 
