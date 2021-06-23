@@ -2,7 +2,7 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 
-@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.ProdutoViewModel>
+@model X.PagedList.StaticPagedList<ProjetoMVC.Business.Models.Produto>
 @{
     ViewData["Title"] = "Lista de Produtos";
     var pesquisa = Context.Request.Query["pesquisa"];
@@ -32,4 +32,4 @@
     </div>
 }
 
-@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina = pagina, pesquisa = pesquisa }))
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("ListaDeProdutos", new { pagina = pagina, pesquisa = pesquisa }))

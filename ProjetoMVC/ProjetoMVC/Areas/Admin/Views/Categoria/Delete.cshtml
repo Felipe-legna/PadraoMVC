@@ -41,7 +41,7 @@
             @Html.DisplayName("Categoria Pai")
         </dt>
         <dd class="col-sm-10">
-            @if (!String.IsNullOrEmpty(ViewBag.CategoriaPai.ToString()))
+            @if (ViewBag.CategoriaPai != null)
                 @ViewBag.CategoriaPai
         </dd>
         @*<dt class = "col-sm-2">

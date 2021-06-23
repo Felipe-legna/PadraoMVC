@@ -21,12 +21,12 @@ namespace ProjetoMvc.Data.Repository
         {
             int numeroPagina = pagina ?? 1;
 
-            var Bancadas = Db.ModelosBancadas.Include(c => c.Categoria).AsQueryable();
+            //var Bancadas = Db.ModelosBancadas.Include(c => c.Categoria).ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA).AsQueryable();
 
-            if (!String.IsNullOrEmpty(pesquisa))
-                Bancadas = Bancadas.Where(c => c.Nome.Contains(pesquisa));
+            //if (!String.IsNullOrEmpty(pesquisa))
+            //    Bancadas = Bancadas.Where(c => c.Nome.Contains(pesquisa));
 
-            return await Bancadas.ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
+            return await Db.ModelosBancadas.Include(c => c.Categoria).ToPagedListAsync(numeroPagina, QUANTIDADEPAGINA);
         }
 
 

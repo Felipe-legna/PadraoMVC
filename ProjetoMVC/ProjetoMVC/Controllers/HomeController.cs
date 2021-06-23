@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using ProjetoMVC.App.Areas.Admin.ViewModels;
 
 using ProjetoMVC.Business.Interfaces;
@@ -58,7 +59,7 @@ namespace ProjetoMVC.Controllers
         [Route("lista-de-produtos")]
         public async Task<IActionResult> ListaDeProdutos(int? pagina, string pesquisa)
         {
-            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoContexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
+            var dadosPaginados = await _produtoContexto.ObterTodosPaginados(pagina, pesquisa);
             return View(dadosPaginados);
         }
                        
@@ -66,7 +67,7 @@ namespace ProjetoMVC.Controllers
         [Route("lista-de-modelos-de-bancadas")]
         public async Task<IActionResult> ListaDeModelosBancadas(int? pagina, string pesquisa)
         {
-            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ModeloBancadaViewModel>>(await _modeloBancadaRepository.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
+            var dadosPaginados = await _modeloBancadaRepository.ObterTodosPaginados(pagina, pesquisa);
             ViewBag.Materiais = _mapper.Map<IEnumerable<MaterialViewModel>>(await _materialRepository.ObterTodos()).Select(a => new SelectListItem(a.Nome, a.Id.ToString()));
             
             return View(dadosPaginados);
@@ -77,9 +78,9 @@ namespace ProjetoMVC.Controllers
         {           
 
             List<Peca> pecas = _mapper.Map<List<Peca>>(pecasViewModel);
-             var bancada = _bancadaService.DefinirTipoBancada(categoria, metodo, Convert.ToDecimal(frontao), Convert.ToDecimal(saia), pecas);
-            string metrosQuadrados = bancada.MetroQuadrado.ToString();
-            return new JsonResult(metrosQuadrados);
+            var bancada = _bancadaService.DefinirTipoBancada(categoria, metodo, Convert.ToDecimal(frontao), Convert.ToDecimal(saia), pecas);
+            //string metrosQuadrados = bancada;
+            return new JsonResult(bancada);
         }
                
 

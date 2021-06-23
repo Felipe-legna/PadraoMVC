@@ -37,10 +37,9 @@ namespace ProjetoMVC.Areas.Admin.Controllers
 
         [Route("lista-de-modelos-de-bancadas")]
         public async Task<IActionResult> Index(int? pagina, string pesquisa)
-        {
-            IPagedList dadosPaginados = _mapper.Map<IEnumerable<ModeloBancadaViewModel>>(await _contexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
-
-            return View(dadosPaginados);
+        {   
+            var itens = _mapper.Map<IEnumerable<ModeloBancadaViewModel>>(await _contexto.ObterTodos());
+            return View(itens);
         }
 
 

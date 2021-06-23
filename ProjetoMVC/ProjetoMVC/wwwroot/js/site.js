@@ -1,4 +1,5 @@
 ﻿
+
 // Write your Javascript code.
 var quantidadePecas = 0;
 var metodo = "";
@@ -43,9 +44,20 @@ $(document).ready(function () {
             requisicao("POST", data, "adicionar-bancada", adicionarMaterial);
         }
     });
+
+
+    $('.dataTable').DataTable({
+        //"scrollY": "200px",
+        //"scrollCollapse": true,
+        "paging": true,
+        language: {
+            url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
+        }
+    });
+
 })
 
-
+    
 
 function adicionarPecas(quantidadePecas) {
     var pecas = "";
@@ -57,11 +69,18 @@ function adicionarPecas(quantidadePecas) {
 }
 
 function adicionarMaterial(dados) {
+    //var objeto = JSON.stringify(dados);
+    var metroQuadrado = dados.metroQuadrado;
 
-    var teste = dados;
-    var ok = '';
+    //to-do 
+    // Adicionar a peça no coockie
+
+    calcularValorPeca(metroQuadrado)
 }
 
+function calcularValorPeca(metroQuadrado) {
+
+}
 
 function addInput(nomeHtml, classe, tamanhoColuna) {
     var input = '<div class="col-sm-' + tamanhoColuna + '"><div class="form-group"><label for="inputsm">' + nomeHtml + '</label><input class="form-control input-sm ' + classe + '" type="text" value=""></div></div>';

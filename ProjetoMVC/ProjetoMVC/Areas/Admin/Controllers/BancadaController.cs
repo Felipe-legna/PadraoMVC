@@ -39,7 +39,7 @@ namespace ProjetoMVC.Areas.Admin.Controllers
         {
             IPagedList dadosPaginados = _mapper.Map<IEnumerable<BancadaViewModel>>(await _contexto.ObterTodosPaginados(pagina, pesquisa)).ToPagedList();
 
-            return View(dadosPaginados);
+            return View(_mapper.Map<IEnumerable<BancadaViewModel>>(await _contexto.ObterTodos()));
         }
 
 

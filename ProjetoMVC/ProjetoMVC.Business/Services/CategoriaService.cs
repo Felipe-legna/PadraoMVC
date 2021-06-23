@@ -10,14 +10,14 @@ namespace ProjetoMVC.Business.Services
 {
     public class CategoriaService : BaseService, ICategoriaService
     {
-        private readonly ICategoriaRepository _clienteRepository;
+        private readonly ICategoriaRepository _categoriaRepository;
         //private readonly IEnderecoRepository _enderecoRepository;
 
-        public CategoriaService(ICategoriaRepository clienteRepository
+        public CategoriaService(ICategoriaRepository categoriaRepository
             //,IEnderecoRepository enderecoRepository
             , INotificador notificador) : base(notificador)
         {
-            _clienteRepository = clienteRepository;
+            _categoriaRepository = categoriaRepository;
             //_enderecoRepository = enderecoRepository;
         }
 
@@ -26,7 +26,7 @@ namespace ProjetoMVC.Business.Services
             //Validar
             if (!ExecutarValidacao(new CategoriaValidation(), entity)) return;
             //Executar
-            await _clienteRepository.Adicionar(entity);
+            await _categoriaRepository.Adicionar(entity);
         }
 
         public async Task Atualizar(Categoria entity)
@@ -34,7 +34,7 @@ namespace ProjetoMVC.Business.Services
             //Validar
             if (!ExecutarValidacao(new CategoriaValidation(), entity)) return;
             //Executar
-            await _clienteRepository.Atualizar(entity);
+            await _categoriaRepository.Atualizar(entity);
         }
 
 
@@ -55,12 +55,12 @@ namespace ProjetoMVC.Business.Services
             //    await _enderecoRepository.Remover(endereco.Id);
             //}
 
-            await _clienteRepository.Remover(id);
+            await _categoriaRepository.Remover(id);
         }
         public void Dispose()
         {
             //_enderecoRepository?.Dispose();
-            _clienteRepository?.Dispose();
+            _categoriaRepository?.Dispose();
         }
     }
 }

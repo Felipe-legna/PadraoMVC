@@ -1,4 +1,4 @@
-﻿@model X.PagedList.IPagedList<ProjetoMVC.App.Areas.Admin.ViewModels.ModeloBancadaViewModel>
+﻿@model X.PagedList.StaticPagedList<ProjetoMVC.Business.Models.ModeloBancada>
 @{
     ViewData["Title"] = "Index";
     var pesquisa = Context.Request.Query["pesquisa"];
@@ -54,7 +54,7 @@
 </table>
 
 
-@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("Index", new { pagina, pesquisa = pesquisa }))
+@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("ListaDeModelosBancadas", new { pagina, pesquisa = pesquisa }))
 
 
 
