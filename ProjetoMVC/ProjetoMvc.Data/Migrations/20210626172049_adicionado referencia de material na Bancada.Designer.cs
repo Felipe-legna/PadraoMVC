@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoMVC.Data.Context;
 
 namespace ProjetoMvc.Data.Migrations
 {
     [DbContext(typeof(ProjetoMVCContext))]
-    partial class ProjetoMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20210626172049_adicionado referencia de material na Bancada")]
+    partial class adicionadoreferenciadematerialnaBancada
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,9 +44,6 @@ namespace ProjetoMvc.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Saia")
-                        .HasColumnType("DECIMAL(10,2)");
-
-                    b.Property<decimal>("Valor")
                         .HasColumnType("DECIMAL(10,2)");
 
                     b.HasKey("Id");

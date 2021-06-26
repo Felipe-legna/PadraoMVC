@@ -22,6 +22,10 @@ namespace ProjetoMVC.App.Areas.Admin.ViewModels
         [DisplayName("M² Quadrado")]
         public decimal MetroQuadrado { get; set; }
 
+        public decimal Valor { get; set; }
+        public Guid? MaterialId { get; set; }
+        public MaterialViewModel MaterialViewModel { get; set; }
+
         public Guid? ModeloBancadaId { get; set; }
         public ModeloBancadaViewModel ModeloBancada { get; set; }
 

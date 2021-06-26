@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
+using ProjetoMVC.Business.Interfaces;
 using ProjetoMVC.Business.Models;
 using ProjetoMVC.wwwroot.lib.cookie;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoMVC.Site.lib.orcamento
 {
-    public class CookieOrcamento
+    public class CookieOrcamento : ICookieOrcamento 
     {
         private readonly string Key = "Orcamento";
         private readonly Cookie _cookie;
@@ -50,6 +51,8 @@ namespace ProjetoMVC.Site.lib.orcamento
             Salvar(Lista);
         }
 
+
+        // Usado no cliente
         public void CadastrarCliente(Cliente item)
         {
            
@@ -62,6 +65,31 @@ namespace ProjetoMVC.Site.lib.orcamento
                 Salvar("cliente", item.Id.ToString());
             }
             
+        }
+
+        public void CadastrarBancada(Bancada item)
+        {
+
+            List<Bancada> Lista;
+            if (_cookie.Existe("bancada"))
+            {
+                Lista = JsonConvert.DeserializeObject<List<Bancada>>(Consultar("bancada"));
+                var ItemLocalizado = Lista.SingleOrDefault(a => a.Id == item.Id);
+
+                if (ItemLocalizado == null)
+                {
+                    Lista.Add(item);
+                }
+               
+            }
+            else
+            {
+                Lista = new List<Bancada>();
+                Lista.Add(item);
+            }
+
+
+            Salvar("bancada", JsonConvert.SerializeObject(Lista));            
         }
 
 
@@ -130,6 +158,7 @@ namespace ProjetoMVC.Site.lib.orcamento
             _cookie.Cadastrar(Key, Valor);
         }
 
+        
         public bool Existe(string Key)
         {
             if (_cookie.Existe(Key))

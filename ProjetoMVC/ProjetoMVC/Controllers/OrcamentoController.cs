@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ProjetoMVC.Business.Interfaces;
 using ProjetoMVC.Business.Models;
 using ProjetoMVC.Site.lib.orcamento;
@@ -15,16 +16,19 @@ namespace ProjetoMVC.Controllers
         private readonly CookieOrcamento _cookieOrcamento;
         private readonly IClienteRepository _contextoCliente;
         private readonly IProdutoRepository _contextoProduto;
+        private readonly IModeloBancadaRepository _contextoModeloBancada;
         private readonly IMapper _mapper;
         public OrcamentoController(CookieOrcamento cookieOrcamento,
             IClienteRepository contextoCliente,
-            IProdutoRepository contexto, 
+            IProdutoRepository contexto,
+            IModeloBancadaRepository contextoModeloBancada,
             IMapper mapper) 
         {
 
             _cookieOrcamento = cookieOrcamento;
             _contextoCliente = contextoCliente;
             _contextoProduto = contexto;
+            _contextoModeloBancada = contextoModeloBancada;
             _mapper = mapper;
         }
 
@@ -36,10 +40,50 @@ namespace ProjetoMVC.Controllers
             //return View(produtoItemCompleto);
 
             List<ProdutoItem> produtosOrcamento = _cookieOrcamento.Consultar();
-
+            
+            
             string cliente = _cookieOrcamento.Consultar("cliente");
+            List<Bancada> bancadas = JsonConvert.DeserializeObject<List<Bancada>>(_cookieOrcamento.Consultar("bancada"));
+
+           
 
             return View(produtosOrcamento);
+        }
+
+
+        //cliente ID 
+        public async Task<IActionResult> AdicionarCliente(Guid id)
+        {
+            Cliente cliente = await _contextoCliente.ObterPorId(id);
+
+            if (cliente == null)
+            {
+                return View("NaoExisteItem");
+            }
+            else
+            {
+                var item = new Cliente() { Id = id };
+                _cookieOrcamento.CadastrarCliente(item);
+
+                return RedirectToAction("lista-de-modelos-de-bancadas", "Home");               
+            }
+        }
+
+        public async Task<IActionResult> AdicionarBancada(Guid id, Guid materialId, decimal metroQuadrado, decimal valorTotal)
+        {
+            var modelo = await _contextoModeloBancada.ObterPorId(id);
+
+            if (modelo == null)
+            {
+                return View("NaoExisteItem");
+            }
+            else
+            {
+                var item = new Bancada() { Id = id, MaterialId = materialId, MetroQuadrado = metroQuadrado, Valor =  valorTotal };
+                _cookieOrcamento.CadastrarBancada(item);
+
+                return RedirectToAction("lista-de-produtos", "Home");
+            }
         }
 
 
@@ -62,24 +106,7 @@ namespace ProjetoMVC.Controllers
             }
         }
 
-        //Item ID = ID Produto
-        public async Task<IActionResult> AdicionarCliente(Guid id)
-        {
-            Cliente cliente = await _contextoCliente.ObterPorId(id);
-
-            if (cliente == null)
-            {
-                return View("NaoExisteItem");
-            }
-            else
-            {
-                var item = new Cliente() { Id = id };
-                _cookieOrcamento.CadastrarCliente(item);
-
-                return RedirectToAction("lista-de-clientes", "Home");
-                //return RedirectToAction(nameof(Index));
-            }
-        }
+       
 
         public async Task<IActionResult> AlterarQuantidade(Guid id, int quantidade)
         {

@@ -34,10 +34,14 @@ namespace ProjetoMvc.Data.Mapping
             builder.Property(p => p.MetroQuadrado)
                .HasColumnType("DECIMAL(10,2)");
 
+            builder.Property(p => p.Valor)
+              .HasColumnType("DECIMAL(10,2)");
+            
+
             //builder.Property(p => p.QuantidadePecas)
             //    .HasColumnType("INT");
 
-            ////builder.HasMany(b => b.Pecas);
+            builder.HasOne(b => b.Material);
 
 
             //builder.HasOne(p => p.Categoria);            

@@ -12,6 +12,9 @@ namespace ProjetoMVC.Business.Models
         public List<Peca> Pecas { get; set; }
         public decimal MetroQuadrado { get; set; }
 
+        public decimal Valor { get; set; }
+        public Guid? MaterialId { get; set; }
+        public Material Material { get; set; }
         public Guid? ModeloBancadaId { get; set; }
         public ModeloBancada ModeloBancada { get; set; }
     }

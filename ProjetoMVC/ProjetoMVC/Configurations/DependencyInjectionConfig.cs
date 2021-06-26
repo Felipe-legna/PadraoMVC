@@ -53,8 +53,8 @@ namespace ProjetoMVC.Site.Configurations
             services.AddScoped<IModeloBancadaService, ModeloBancadaService>();
 
             services.AddScoped<IMaterialRepository, MaterialRepository>();
-           
 
+            services.AddScoped<ICookieOrcamento, CookieOrcamento>();
 
             //services.AddScoped<IBancadaRetaService, BancadaRetaService>();
             //services.AddScoped<IBancadaEmLService, BancadaEmLService>();

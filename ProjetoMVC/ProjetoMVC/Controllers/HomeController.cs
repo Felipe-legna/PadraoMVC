@@ -25,6 +25,8 @@ namespace ProjetoMVC.Controllers
         private readonly ICategoriaRepository _categoriaContexto;
         private readonly IBancadaService _bancadaService;
         private readonly IMaterialRepository _materialRepository;
+
+        private readonly ICookieOrcamento _cookieOrcamento;
         private readonly IMapper _mapper;
 
         public HomeController( IClienteRepository clienteContexto,
@@ -33,6 +35,7 @@ namespace ProjetoMVC.Controllers
                                ICategoriaRepository categoriaContexto,
                                IBancadaService bancadaService,
                                IMaterialRepository materialRepository,
+                               ICookieOrcamento cookieOrcamento,
                                IMapper mapper)
         {
             _clienteContexto = clienteContexto;
@@ -41,13 +44,19 @@ namespace ProjetoMVC.Controllers
             _categoriaContexto = categoriaContexto;
             _bancadaService = bancadaService;
             _materialRepository = materialRepository;
+            _cookieOrcamento = cookieOrcamento;
             _mapper = mapper;
 
         }
 
-
-       
+        [Route("")]
         [Route("index")]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+
         [Route("lista-de-clientes")]
         public async Task<IActionResult> ListaDeClientes(int? pagina, string pesquisa)
         {
@@ -56,12 +65,7 @@ namespace ProjetoMVC.Controllers
         }
 
 
-        [Route("lista-de-produtos")]
-        public async Task<IActionResult> ListaDeProdutos(int? pagina, string pesquisa)
-        {
-            var dadosPaginados = await _produtoContexto.ObterTodosPaginados(pagina, pesquisa);
-            return View(dadosPaginados);
-        }
+      
                        
 
         [Route("lista-de-modelos-de-bancadas")]
@@ -73,8 +77,15 @@ namespace ProjetoMVC.Controllers
             return View(dadosPaginados);
         }
 
-       [Route("adicionar-bancada")]
-        public IActionResult AdicionarBancada(string categoria, string metodo, string frontao, string saia, List<PecaViewModel> pecasViewModel)//, decimal frontao, decimal saia
+        [Route("lista-de-produtos")]
+        public async Task<IActionResult> ListaDeProdutos(int? pagina, string pesquisa)
+        {
+            var dadosPaginados = await _produtoContexto.ObterTodosPaginados(pagina, pesquisa);
+            return View(dadosPaginados);
+        }
+
+        [Route("criar-bancada")]
+        public IActionResult CriarBancada(string categoria, string metodo, string frontao, string saia, List<PecaViewModel> pecasViewModel)//, decimal frontao, decimal saia
         {           
 
             List<Peca> pecas = _mapper.Map<List<Peca>>(pecasViewModel);
@@ -84,12 +95,29 @@ namespace ProjetoMVC.Controllers
         }
 
         [Route("calcular-valor-bancada")]
-        public async Task<IActionResult> CalcularValorBancada(string idMaterial, string metroQuadrado)
+        public async Task<IActionResult> CalcularValorBancada(string materialId, string metroQuadrado)
         {
 
-            var valor = await _bancadaService.CalcularValorBancada(Guid.Parse(idMaterial), Convert.ToDecimal(metroQuadrado));
+            var valor = await _bancadaService.CalcularValorBancada(Guid.Parse(materialId), Convert.ToDecimal(metroQuadrado));
             return new JsonResult(valor);
 
+        }
+
+
+        [Route("adicionar-bancada")]
+        public IActionResult AdicionarBancada(string bancadaId, string materialId, string metroQuadrado, string valor)//, decimal frontao, decimal saia
+        {
+            var bancada = new Bancada()
+            {
+                Id = Guid.Parse(bancadaId),
+                MaterialId = Guid.Parse(materialId),
+                MetroQuadrado = Convert.ToDecimal(metroQuadrado),
+                Valor = Convert.ToDecimal(valor)
+            };
+
+            _cookieOrcamento.CadastrarBancada(bancada);
+           
+            return new JsonResult("lista-de-produtos");
         }
     }
 }
