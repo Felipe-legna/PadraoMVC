@@ -72,20 +72,38 @@ $(document).ready(function () {
         calcularValorBancada(materialId, metroQuadrado);
     });
 
-    $("#adicionarBancadaOrcamento").click(function () {    
+    $("#adicionarBancadaOrcamento").click(function () {
+        validarNumero("Valor Total", cnt(valorBancada));
 
-       
-        adicionarBancadaOrcamento(bancadaId, materialId, metroQuadrado, valorBancada);
-        $('#modelBancada').modal('hide');
+        if (errors.length > 0)
+            swal("Ops!", errors, "error");
+        else {
+            adicionarBancadaOrcamento(bancadaId, materialId, metroQuadrado, valorBancada);
+            $('#modelBancada').modal('hide');
+        }
     });
+
+
 
 })
 
 
 function adicionarBancadaOrcamento(bancadaId, materialId, metroQuadrado, valorBancada) {
     var data = { "bancadaid": bancadaId, "materialId": materialId, "metroQuadrado": metroQuadrado, "valor": exb(valorBancada) };
-    requisicao("POST", data, "adicionar-bancada", liberarTabMaterial);
+    requisicao("POST", data, "adicionar-bancada", adicionarBancadaOrcamento_callback);
 }
+
+function adicionarBancadaOrcamento_callback(dados) {
+    swal("Show!", "Bancada Adicionada com sucesso.", "success");
+    exibirCarregando(false);
+}
+
+function redirecionar(caminho) {
+    window.location.href = "/" + caminho;
+}
+
+
+
 
 function adicionarPecas(quantidadePecas) {
     var pecas = "";
