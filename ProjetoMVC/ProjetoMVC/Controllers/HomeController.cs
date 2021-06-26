@@ -82,7 +82,14 @@ namespace ProjetoMVC.Controllers
             //string metrosQuadrados = bancada;
             return new JsonResult(bancada);
         }
-               
 
+        [Route("calcular-valor-bancada")]
+        public async Task<IActionResult> CalcularValorBancada(string idMaterial, string metroQuadrado)
+        {
+
+            var valor = await _bancadaService.CalcularValorBancada(Guid.Parse(idMaterial), Convert.ToDecimal(metroQuadrado));
+            return new JsonResult(valor);
+
+        }
     }
 }

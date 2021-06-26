@@ -15,5 +15,7 @@ namespace ProjetoMVC.Business.Interfaces
         Task AtualizarMaterial(Material entity);
 
         Task RemoverMaterial(Guid id);
+
+        Task<decimal> CalcularValorBancada(Guid materialId, decimal metroQuadrado);
     }
 }

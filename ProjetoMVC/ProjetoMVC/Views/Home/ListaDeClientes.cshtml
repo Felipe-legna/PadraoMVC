@@ -5,34 +5,50 @@
     var pesquisa = Context.Request.Query["pesquisa"];
 }
 
-<h1>@ViewData["Title"]</h1>
+@*<h1>@ViewData["Title"]</h1>*@
 
 
-
-<p>
-    <a class="btn btn-info" asp-action="Create">Novo Cliente</a>
-</p>
-
-@*<form method="get">   
-        <div class="form-group">
-            <label for="pesquisa" class="control-label"></label>
-            <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
-        </div>
-    <button type="submit" value="Pesquisar"  class="btn btn-info">Pesquisar</button>
-</form>*@
 <br />
-<table class="table table-hover datatable">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+    <h1 class="h2">@ViewData["Title"]</h1>
+   <div class="btn-toolbar mb-2 mb-md-0">
+       <div class="btn-group me-2">
+           <button type="button" class="btn btn-sm btn-outline-secondary" asp-action="Create"> Novo Cliente</button>
+           
+        </div>
+       @*<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" >
+           <span data-feather="calendar"></span>
+          
+       </button>*@
+    </div>
+</div>
+
+
+
+@*<p>
+    <a class="btn btn-info" asp-action="Create">Novo Cliente</a>
+</p>*@
+
+@*<form method="get">
+            <div class="form-group">
+                <label for="pesquisa" class="control-label"></label>
+                <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
+            </div>
+        <button type="submit" value="Pesquisar"  class="btn btn-info">Pesquisar</button>
+    </form>*@
+<br />
+<table class="table table-hover dataTable">
     <thead class="thead-dark">
         <tr>
             <th>
                 Nome
             </th>
-            <th>               
+            <th>
                 Email
             </th>
-            <th>             
+            <th>
                 Telefone
-            </th>           
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -54,7 +70,7 @@
                 </td>
                 <td class="text-right">
                     <a class="btn btn-info" asp-controller="Orcamento" asp-action="AdicionarCliente" asp-route-id="@item.Id"><spam class="fa fa-search">Adicionar</spam></a>
-                  
+
                 </td>
             </tr>
         }

@@ -152,5 +152,12 @@ namespace ProjetoMVC.Business.Services
             _contexto?.Dispose();
             _materialContexto?.Dispose();
         }
+
+        public async Task<decimal> CalcularValorBancada(Guid materialId, decimal metroQuadrado)
+        {
+            var valorMaterial = await _materialContexto.ObterPorId(materialId);
+            decimal valorBancada = valorMaterial.Valor * metroQuadrado;
+            return valorBancada;
+        }
     }
 }

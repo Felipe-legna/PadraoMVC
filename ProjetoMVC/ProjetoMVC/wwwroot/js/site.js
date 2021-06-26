@@ -7,6 +7,9 @@ var categoria = "";
 var errors = [];
 
 $(document).ready(function () {
+
+    $("#nav-material-tab").addClass("disabled");
+
     $("#listaDeModelos tr").click(function () {
         var id = $(this).find(".id").html();
         quantidadePecas = $(this).find(".quantidadePecas").html();
@@ -41,7 +44,7 @@ $(document).ready(function () {
             swal("Ops!", errors, "error");
         else {
             var data = { "categoria": categoria, "metodo": metodo, "frontao": exb(frontao), "saia": exb(saia), "pecasViewModel": pecas };
-            requisicao("POST", data, "adicionar-bancada", adicionarMaterial);
+            requisicao("POST", data, "adicionar-bancada", liberarTabMaterial);
         }
     });
 
@@ -49,15 +52,27 @@ $(document).ready(function () {
     $('.dataTable').DataTable({
         //"scrollY": "200px",
         //"scrollCollapse": true,
-        "paging": true,
+        //"paging": false,
         language: {
             url: '//cdn.datatables.net/plug-ins/1.10.25/i18n/Portuguese-Brasil.json'
         }
     });
 
+
+    $("#material").change(function () {
+        var idMaterial = $(this).val();
+        var metroQuadrado = $("#metroQuadrado").val();
+        calcularValorBancada(idMaterial, metroQuadrado);
+    });
+
+    $("#adicionarBancadaOrcamento").click(function () {
+        alert("Adicionado ao Orçamento");
+        $('#modelBancada').modal('hide');
+    });
+
 })
 
-    
+
 
 function adicionarPecas(quantidadePecas) {
     var pecas = "";
@@ -68,19 +83,28 @@ function adicionarPecas(quantidadePecas) {
     $("#pecas").append(pecas);
 }
 
-function adicionarMaterial(dados) {
-    //var objeto = JSON.stringify(dados);
-    var metroQuadrado = dados.metroQuadrado;
+function liberarTabMaterial(dados) {
+    exibirCarregando(false);
+    $("#nav-material-tab").removeClass("disabled");
 
-    //to-do 
-    // Adicionar a peça no coockie
-
-    calcularValorPeca(metroQuadrado)
+    $("#metroQuadrado").val(exb(dados.metroQuadrado));
 }
 
-function calcularValorPeca(metroQuadrado) {
-
+function calcularValorBancada(idMaterial, metroQuadrado) {
+    if (idMaterial != "") {
+        var data = { "idmaterial": idMaterial, "metroquadrado": metroQuadrado };
+        requisicao("GET", data, "calcular-valor-bancada", calcularValorBancada_callback);
+    }
 }
+
+function calcularValorBancada_callback(dados) {
+    exibirCarregando(false);
+    $("#valorBancada").val(dados);
+}
+
+
+
+
 
 function addInput(nomeHtml, classe, tamanhoColuna) {
     var input = '<div class="col-sm-' + tamanhoColuna + '"><div class="form-group"><label for="inputsm">' + nomeHtml + '</label><input class="form-control input-sm ' + classe + '" type="text" value=""></div></div>';
@@ -100,8 +124,7 @@ function validarNumero(campo, numero) {
         }
 
     }
-    else if (campo != "Frontão" && campo != "Saia")
-    {
+    else if (campo != "Frontão" && campo != "Saia") {
         errors.push("O campo " + campo + " é obrigatório.\n");
         return;
     }

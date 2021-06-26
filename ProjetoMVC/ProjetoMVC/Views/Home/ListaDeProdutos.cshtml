@@ -7,9 +7,15 @@
     ViewData["Title"] = "Lista de Produtos";
     var pesquisa = Context.Request.Query["pesquisa"];
 }
-<h1>@ViewData["Title"]</h1>
 
 
+<br />
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+    <h1 class="h2">@ViewData["Title"]</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+
+    </div>
+</div>
 
 <form method="get">
     <div class="form-group">

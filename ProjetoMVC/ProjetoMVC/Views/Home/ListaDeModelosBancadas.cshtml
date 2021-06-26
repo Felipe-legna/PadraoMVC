@@ -1,124 +1,144 @@
 ﻿@model X.PagedList.StaticPagedList<ProjetoMVC.Business.Models.ModeloBancada>
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Modelos de Bancadas";
     var pesquisa = Context.Request.Query["pesquisa"];
 }
 
-<h1>Modelos de Bancadas</h1>
 
-
-<form method="get">
-    <div class="form-group">
-        <label for="pesquisa" class="control-label"></label>
-        <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
+    <br />
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+        <h1 class="h2">@ViewData["Title"]</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+                    
+        </div>
     </div>
-    <button type="submit" value="Pesquisar" class="btn btn-info">Pesquisar</button>
-</form>
-
-<table class="table table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th></th>
-            <th>Nome</th>
-            <th>Descricao</th>
-            
-            <th hidden></th>
-        </tr>
-    </thead>
-    <tbody id="listaDeModelos">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Descricao)
-                </td>
-                
-                <td class="text-right" hidden>
-                    @*<a class="btn btn-info" asp-action="adicionar-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-search">Selecionar</spam></a>*@
-                    @*<a id="@item.Id" class="btn btn-info selecionarBancada">Selecionar</a>*@
-                    <div class="id">@item.Id</div>
-                    <div class="quantidadePecas">@item.QuantidadePecas</div>
-                    <div class="metodo">@item.Metodo</div>
-                    <div class="categoria">@item.Categoria.Nome</div>
-
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-
-@Html.PagedListPager((IPagedList)Model, pagina => Url.Action("ListaDeModelosBancadas", new { pagina, pesquisa = pesquisa }))
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="modelBancada" tabindex="-1" role="dialog" aria-labelledby="modelBancada" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            @*<div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar Medidas</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>*@
-            <div class="modal-body">
-                
-                
-                <nav>
-                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                        <a class="nav-link active" id="nav-bancada-tab" data-toggle="tab" href="#nav-bancada" role="tab" aria-controls="nav-bancada" aria-selected="true">Bancada</a>
-                        <a class="nav-link" id="nav-material-tab" data-toggle="tab" href="#nav-material" role="tab" aria-controls="nav-material" aria-selected="false">Material</a>                        
-                    </div>
-                </nav>
-                <!-- Adicionar Bancada-->
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-bancada" role="tabpanel" aria-labelledby="nav-bancada-tab">
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputsm">Frontão</label>
-                                    <input class="form-control input-sm" id="frontao" type="text" value="">
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="inputsm">Saia</label>
-                                    <input class="form-control input-sm" id="saia" type="text">
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr />
-                        <div id="pecas">
-                            @*Será inserido por javascript de acordo com a quantidade de peças*@
-                        </div>
-                    </div>
-                    
     
-                    <!-- Selecionar Material-->
-                    <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
-                        <div class="form-group">
-                            <label class="control-label"></label>
-                            <select class="form-control" asp-items="ViewBag.Materiais">
-                                <option value="">Selecione</option>
-                            </select>                            
+    <form method="get">
+        <div class="form-group">
+            <label for="pesquisa" class="control-label"></label>
+            <input id="pesquisa" value="@pesquisa" name="pesquisa" type="text" class="form-control" placeholder="Digite o Telefone ou Nome" />
+        </div>
+        <button type="submit" value="Pesquisar" class="btn btn-info">Pesquisar</button>
+    </form>
+
+    <table class="table table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th></th>
+                <th>Nome</th>
+                <th>Descricao</th>
+
+                <th hidden></th>
+            </tr>
+        </thead>
+        <tbody id="listaDeModelos">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/imagens/@item.Imagem" alt="@item.Imagem" style="width: 70px; height: 70px" />
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </td>
+
+                    <td class="text-right" hidden>
+                        @*<a class="btn btn-info" asp-action="adicionar-modelo-de-bancada" asp-route-id="@item.Id"><spam class="fa fa-search">Selecionar</spam></a>*@
+                        @*<a id="@item.Id" class="btn btn-info selecionarBancada">Selecionar</a>*@
+                        <div class="id">@item.Id</div>
+                        <div class="quantidadePecas">@item.QuantidadePecas</div>
+                        <div class="metodo">@item.Metodo</div>
+                        <div class="categoria">@item.Categoria.Nome</div>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+
+    @Html.PagedListPager((IPagedList)Model, pagina => Url.Action("ListaDeModelosBancadas", new { pagina, pesquisa = pesquisa }))
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="modelBancada" tabindex="-1" role="dialog" aria-labelledby="modelBancada" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                @*<div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Medidas</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>*@
+                <div class="modal-body">
+
+
+                    <nav>
+                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                            <a class="nav-link active" id="nav-bancada-tab" data-toggle="tab" href="#nav-bancada" role="tab" aria-controls="nav-bancada" aria-selected="true">Bancada</a>
+                            <a class="nav-link" id="nav-material-tab" data-toggle="tab" href="#nav-material" role="tab" aria-controls="nav-material" aria-selected="false">Material</a>
                         </div>
-                    
+                    </nav>
+                    <!-- Adicionar Bancada-->
+                    <div class="tab-content" id="nav-tabContent">
+                        <div class="tab-pane fade show active" id="nav-bancada" role="tabpanel" aria-labelledby="nav-bancada-tab">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputsm">Frontão</label>
+                                        <input class="form-control input-sm" id="frontao" type="text" value="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="inputsm">Saia</label>
+                                        <input class="form-control input-sm" id="saia" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <hr />
+                            <div id="pecas">
+                                @*Será inserido por javascript de acordo com a quantidade de peças*@
+                            </div>
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                            <button id="adicionarBancada" type="button" class="btn btn-primary">Calcular</button>
+                        </div>
+
+
+                        <!-- Selecionar Material-->
+                        <div class="tab-pane fade" id="nav-material" role="tabpanel" aria-labelledby="nav-material-tab">
+                            <div class="form-group">
+                                <label for="metroQuadrado">Metro Quadrado:</label>
+                                <input class="form-control input-sm" id="metroQuadrado" type="text">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Material</label>
+                                <select id="material" class="form-control" asp-items="ViewBag.Materiais">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="valorBancada">Valor Total:</label>
+                                <input class="form-control input-sm" id="valorBancada" type="text" disabled>
+                            </div>
+
+                            <button id="adicionarBancadaOrcamento" type="button" class="btn btn-primary">Adicionar</button>
+                        </div>
+
                     </div>
-                    
-                </div>               
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                <button id="adicionarBancada" type="button" class="btn btn-primary">Continuar</button>
+                </div>
+                @*<div class="modal-footer">
+                   
+                </div>*@
             </div>
         </div>
     </div>
-</div>
